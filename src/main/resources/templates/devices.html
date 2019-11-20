@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png"/>
+    <link rel="apple-touch-startup-image" href="images/apple-touch-startup-image-320x460.png"/>
+    <meta name="author" content="SindevoThemes"/>
+    <meta name="description" content="GoMobile - A next generation web app theme"/>
+    <meta name="keywords"
+          content="mobile web app, mobile template, mobile design, mobile app design, mobile app theme, mobile wordpress theme, my mobile app"/>
+    <title>GoMobile - A next generation web app theme</title>
+    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+    <link type="text/css" rel="stylesheet" href="colors/metro/metro.css"/>
+    <link type="text/css" rel="stylesheet" href="css/swipebox.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'/>
+    <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+    <script src="js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="js/code.js"></script>
+    <script src="js/socket.js"></script>
+    <script>
+        function fres() {
+            window.location.href = "/resource";
+
+        }
+    </script>
+</head>
+<body>
+<div id="wrapper">
+
+    <div id="content">
+
+        <div class="sliderbg_menu">
+            <div class="gohome radius20"><a id="homebutton"><img src="images/icons/home.png" alt="" title=""
+                                                                 onclick="fres();"/></a></div>
+            <div class="logo"><a href="">物理资源管理</a></div>
+
+            <nav id="menu">
+                <div class="container">
+                    <canvas id="myCanvas" width="433" height="405" style="border: 2px solid grey"></canvas>
+                </div>
+
+            </nav><!-- <ul th:each="device:${DeviceInfo}">
+                    &lt;!&ndash;            <li class="green"><a href="about.ftl" class="insidelink"><img src="images/icons/about.png" alt="" title="" /><span>About Us</span></a></li>&ndash;&gt;
+                    &lt;!&ndash;/*@thymesVar id="ts" type=""*/&ndash;&gt;
+                    <li class="bluegreen"><img src="images/icons/coffe_mechine.png" alt="" title=""/><span
+                            th:text="*{device.deviceName}"></span></a></li>
+                </ul>-->
+            <div class="clear"></div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<script type="text/javascript" th:inline="javascript">
+
+
+    var deviceList = [[${DeviceList}]];
+    // console.log(deviceList[1][3])
+    // console.log(tmp);
+    // console.log(tmp.length);
+    // var deviceList =new Array(tmp.length);
+
+    for (var i = 0; i < deviceList.length; i++) {
+
+        if (deviceList[i][3] == "NotReady") {
+            deviceList[i][3] = 0;
+        } else {
+            deviceList[i][3] = 1;
+        }
+    }
+
+
+    c7 = document.getElementById("myCanvas");
+
+    c7.width = document.documentElement.clientWidth - 5;
+    c7.height = document.documentElement.clientWidth;
+    var cW = c7.offsetWidth;    // 获取元素宽度
+    var imgObj = new Image();
+    imgObj.src = "images/pku.png";
+    var imgW = '';
+    var imgH = '';
+
+    var l = 20;
+    // imgObj.onload
+    var MaxRound;
+    imgObj.onload = function () {
+        //图片尺寸自适应，与用户可视区域一致
+
+        imgW = c7.width;
+        imgH = c7.height;
+        console.log(imgW, imgH);
+        console.log(imgObj.width, imgObj.height);
+        var ctx7 = c7.getContext("2d");
+
+        //绘制背景平面图
+        ctx7.drawImage(this, 0, 0, cW, imgH * cW / imgW)
+        var canvas = document.getElementById('myCanvas');
+        var ctx = canvas.getContext("2d");
+        //颜色列表，灰色未注册，橙色为已注册
+        var colorList = new Array()
+        colorList[0] = "gray";
+        colorList[1] = "orange";
+        //绘制设备
+        for (var i = 0; i < deviceList.length; i++) {
+            console.log(deviceList[i][0], deviceList[i][1]);
+            //横向平面图，坐标转换
+            var xy = XYMap(deviceList[i][0], deviceList[i][1], imgW, imgH);
+            console.log(xy)
+            deviceList[i][0] = xy[0];
+            deviceList[i][1] = xy[1];
+            //渲染颜色
+            // ctx.fillStyle = colorList[deviceList[i][3]];
+            // 渲染位置
+            var rectLong = 15;
+            MaxRound = rectLong;
+            // ctx.fillRect(deviceList[i][0], deviceList[i][1], rectLong, rectLong);
+            // 设置设备名称
+            ctx.beginPath();
+            ctx.arc(deviceList[i][0],deviceList[i][1],rectLong,0,2*Math.PI,true);
+            ctx.closePath();
+            // ctx.stroke();
+            ctx.fillStyle = colorList[deviceList[i][3]];
+            ctx.fill();
+            //console.log(deviceList[i][4].length);
+            ctx.fillText(deviceList[i][4], deviceList[i][0]-MaxRound, deviceList[i][1] + MaxRound*2, deviceList[i][1] + MaxRound);
+            ctx.globalCompositeOperation = "source-over"; //全局合成操作
+
+        }
+
+    }
+
+    var canvas = document.getElementById('myCanvas')
+    var context = canvas.getContext('2d')
+    //监听平面图点击事件
+    canvas.addEventListener('click', function (e) {
+        console.log('offsetX:' + e.offsetX + ',offsetY:' + e.offsetY)
+        console.log('layerX:' + e.layerX + ',layerY:' + e.layerY)
+        console.log('X:' + (e.clientX - canvas.getBoundingClientRect().left) + ',Y:' + (e.clientY - canvas.getBoundingClientRect().top))
+        // alert('X:' + (e.clientX - canvas.getBoundingClientRect().left) + ',Y:' + (e.clientY - canvas.getBoundingClientRect().top));
+        var x = (e.clientX - canvas.getBoundingClientRect().left);
+        var y = (e.clientY - canvas.getBoundingClientRect().top);
+        //寻找当前点击点，是属于什么设备
+        var cost;
+        var deviceNo;
+        for (var i = 0; i < deviceList.length; i++) {
+            if (x >= deviceList[i][0]-MaxRound && x <= deviceList[i][0] + MaxRound && y >= deviceList[i][1]-MaxRound && y <= deviceList[i][1] + MaxRound) {
+                deviceNo = deviceList[i][2];
+                //输入成本弹窗
+                cost = prompt("请输入成本", "￥0.0");
+                break;
+            }
+
+
+        }
+
+
+        // 需要传输的数据
+        var jsonData = {"cost": cost, "deviceId": deviceNo, "status": "Pending"};
+
+        $.ajax({
+            url: '/sendCost',
+            async: true,
+            // 请求方式
+            type: "post",
+            // contentType
+            contentType: "application/json",
+            // dataType
+            dataType: "json",
+            // 把JS的对象或数组序列化一个json 字符串
+            data: JSON.stringify(jsonData),
+            // result 为请求的返回结果对象
+            success: function (result) {
+
+                var exprice = prompt("建议起拍价为 " + result + " ,请输入您的起拍价", result);
+                if (exprice != null && exprice != "") {
+                    var jsonPrice = {"exPrice": exprice, "deviceId": deviceNo, "status": "Pending"};
+
+                    $.ajax({
+                        url: '/sendExPrice',
+                        async: true,
+                        // 请求方式
+                        type: "post",
+                        // contentType
+                        contentType: "application/json",
+                        // dataType
+                        dataType: "json",
+                        // 把JS的对象或数组序列化一个json 字符串
+                        data: JSON.stringify(jsonPrice),
+                        // result 为请求的返回结果对象
+                        success: function (result) {
+                            console.log(result)
+                        }
+                    })
+
+
+                } else {
+                    alert("请输入起拍价");
+                }
+
+            }
+        })
+        setTimeout(window.location.reload(), "1000");
+
+        // var temp = document.createElement("form");
+        // temp.action = "/sendCost";
+        // temp.method = "post";
+        // temp.style.display = "none";
+        // for (var x in data) {
+        //     var opt = document.createElement("textarea");
+        //     opt.name = x;
+        //     opt.value = data[x];
+        //     temp.appendChild(opt);
+        // }
+        // document.body.appendChild(temp);
+        // temp.submit();
+        //发送完成本之后，刷新页面，显示已注册。
+
+        setTimeout(window.location.reload(), "1000");
+
+
+    })
+
+    //坐标变换
+    function XYMap(OriginX, OriginY, width, height) {
+        var newX, newY;
+        // newY = OriginX * height;
+        // newX = width - OringY * width;
+        newX = OriginX * width;
+        newY = OriginY * height;
+
+        return [newX, newY];
+    }
+
+
+</script>
+
+<script type="text/javascript" src="js/jquery.tabify.js"></script>
+<script type="text/javascript" src="js/jquery.swipebox.js"></script>
+<script type="text/javascript" src="js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="js/twitter/jquery.tweet.js" charset="utf-8"></script>
+<script src="js/email.js"></script>
+</body>
+</html>

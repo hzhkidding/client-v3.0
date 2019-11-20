@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="c" type="text" name="cost" >
+<button class="button" onclick="sendCost()">Copy Text</button>
+
+<script>
+    // function sendCost(){
+    //     var cost=document.getElementById("c").value;
+    //     console.log(cost);
+    //     console.log("/sendCost/{"+cost+"}")
+    //
+    //     window.location.href = "/sendCost/"+cost;
+    //
+    // }
+
+    function sendCost() {
+        var cost=document.getElementById("c").value;
+
+        var data = { "cost": cost};
+        var temp = document.createElement("form");
+        temp.action = "/sendCost";
+        temp.method = "post";
+        temp.style.display = "none";
+        for (var x in data) {
+            var opt = document.createElement("textarea");
+            opt.name = x;
+            opt.value = data[x];
+            temp.appendChild(opt);
+        }
+        document.body.appendChild(temp);
+        temp.submit();
+    }
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png"/>
+    <link rel="apple-touch-startup-image" href="images/apple-touch-startup-image-320x460.png"/>
+    <meta name="author" content="SindevoThemes"/>
+    <meta name="description" content="GoMobile - A next generation web app theme"/>
+    <meta name="keywords"
+          content="mobile web app, mobile template, mobile design, mobile app design, mobile app theme, mobile wordpress theme, my mobile app"/>
+    <title>GoMobile - A next generation web app theme</title>
+    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+    <link type="text/css" rel="stylesheet" href="colors/metro/metro.css"/>
+    <link type="text/css" rel="stylesheet" href="css/swipebox.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'/>
+    <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+    <script src="js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="js/code.js"></script>
+    <script src="js/socket.js"></script>
+    <script>
+        function getDeviceResource() {
+            window.location.href = "/getDeviceResource";
+
+        }
+        function getHumanResource() {
+            window.location.href = "/getHumanResource";
+
+        }
+        function getInfoResource() {
+            window.location.href = "/getInfoResource";
+
+        }
+
+        function fcollect() {
+            window.location.href = "/collect";
+
+        }
+
+
+    </script>
+</head>
+<body>
+<div id="wrapper">
+
+    <div id="content">
+
+        <div class="sliderbg_menu">
+            <div class="gohome radius20"><a  id="homebutton"><img src="images/icons/home.png" alt="" title="" onclick="fcollect();" /></a></div>
+
+            <div class="logo"><a href="#">资源管理</a></div>
+<!--            <input type="button" value="增加" onclick="f();" />-->
+            <nav id="menu">
+                <ul>
+                    <li class="green" onclick="getHumanResource();"><img src="images/icons/about.png" alt=""
+                                                                                   title=""/><span>人力资源</span></a>
+                    </li>
+                    <li class="red" onclick="getDeviceResource();"><img src="images/icons/tools.png" alt=""
+                                                                                    title=""/><span>物理资源</span></a>
+                    </li>
+                    <li class="blue" onclick="getInfoResource();"> <img src="images/icons/blog.png" alt=""
+                                                                                 title=""/><span>信息资源</span></a></li>
+                    </li>
+
+
+                </ul>
+
+            </nav>
+
+            <div class="clear"></div>
+
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript" src="js/jquery.tabify.js"></script>
+<script type="text/javascript" src="js/jquery.swipebox.js"></script>
+<script type="text/javascript" src="js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="js/twitter/jquery.tweet.js" charset="utf-8"></script>
+<script src="js/email.js"></script>
+</body>
+</html>

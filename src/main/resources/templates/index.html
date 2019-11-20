@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png"/>
+    <link rel="apple-touch-startup-image" href="images/apple-touch-startup-image-320x460.png"/>
+    <meta name="author" content="SindevoThemes"/>
+    <meta name="description" content="GoMobile - A next generation web app theme"/>
+    <meta name="keywords"
+          content="mobile web app, mobile template, mobile design, mobile app design, mobile app theme, mobile wordpress theme, my mobile app"/>
+    <title>GoMobile - A next generation web app theme</title>
+    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+    <link type="text/css" rel="stylesheet" href="colors/metro/metro.css"/>
+    <link type="text/css" rel="stylesheet" href="css/swipebox.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'/>
+    <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+    <script src="js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="js/code.js"></script>
+</head>
+<body>
+<script src="js/socket.js"></script>
+<!--<script type="text/javascript">
+  /*  setInterval("test()", 500);
+    function test() {
+        $.ajax({
+            url: '/meResourceDescovery',
+            async: true,
+            type: 'get',
+           // jsonp : "jsonpCallback",//服务端用于接收callback调用的function名的参数*!/
+            success: function (data) {
+            if(data!=null) {
+                result = data
+                console.log(data)
+                var price = prompt("请输入价格","");
+                if(price) {
+                    window.location.href = "http://localhost:80/index";
+                }
+            }
+        }
+    })
+    }*/
+    var userId;
+    var name = "ticket";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++)
+    {
+        var c = ca[i].trim();
+        if (c.indexOf(name)==0)
+            //返回cookie的值 == manResourceId
+            userId = c.substring(name.length+1,c.length)
+           // alert(userId);
+    }
+//socket通信
+    if(userId) {
+        var socket;
+        if (typeof (WebSocket) == "undefined") {
+            console.log("很遗憾：您的浏览器不支持WebSocket");
+        } else {
+            console.log("恭喜您：您的浏览器支持WebSocket");
+
+            //实现化WebSocket对象
+            //指定要连接的服务器地址与端口建立连接
+            socket = new WebSocket("ws://192.168.31.147:80/ws/server/"+userId);
+            //连接打开事件
+            socket.onopen = function () {
+                console.log("Socket 已打开");
+               // socket.send(userId);
+            };
+            //收到消息事件
+            socket.onmessage = function (msg) {
+                alert(msg.data);
+                console.log(msg.data);
+            };
+            //连接关闭事件
+            socket.onclose = function () {
+                console.log("Socket已关闭");
+            };
+            //发生了错误事件
+            socket.onerror = function () {
+                alert("Socket发生了错误");
+            }
+            //窗口关闭时，关闭连接
+            window.unload = function () {
+                socket.close();
+            };
+        }
+    }
+</script>-->
+<div id="wrapper">
+
+    <div id="content">
+
+        <div class="sliderbg_menu">
+
+            <div class="logo"><a href="#">人机物平台</a></div>
+            <nav id="menu">
+                <ul>
+                    <li class="bluegreen"><a href="/register" class="insidelink"><img src="images/icons/appMarket.png"
+                                                                                      alt="" title=""/><span>人资源注册</span></a>
+                    </li>
+                </ul>
+
+                <ul th:each="user:${Applicationlist}">
+                    <!--            <li class="green"><a href="about.html" class="insidelink"><img src="images/icons/about.png" alt="" title="" /><span>About Us</span></a></li>-->
+                    <li th:class="${user.color}"><a href="/detail" class="insidelink"><img th:src="${user.image}" alt=""
+                                                                                           title=""/><span
+                            th:text="*{user.name}"></span></a></li>
+                    <!--<li class="green"><a href="about.html" class="insidelink"><img src="images/icons/coffe_mechine.png" alt="" title="" /><span>Coffee</span></a></li>
+                    <li class="red"><a href="services.html" class="insidelink"><img src="images/icons/tools.png" alt="" title="" /><span>Services</span></a></li>
+                    <li class="blue"><a href="blog.html" class="insidelink"><img src="images/icons/blog.png" alt="" title="" /><span>Blog</span></a></li>
+                    <li class="orange"><a href="portfolio.html" class="insidelink"><img src="images/icons/docs.png" alt="" title="" /><span>Portfolio</span></a></li>
+                    <li class="purple"><a href="gallery.html" class="insidelink"><img src="images/icons/photos.png" alt="" title="" /><span>Gallery</span></a></li>
+                    <li class="yellow"><a href="clients.html" class="insidelink"><img src="images/icons/clients.png" alt="" title="" /><span>Clients</span></a></li>
+                    <li class="pink"><a href="twitter.html" class="insidelink"><img src="images/icons/twitter.png" alt="" title="" /><span>Twitter</span></a></li>
+                    <li class="bluegreen"><a href="register.html" class="insidelink"><img src="images/icons/contact.png" alt="" title="" /><span>Contact</span></a></li>-->
+                </ul>
+                <ul th:each="human:${ManResourceList}">
+                    <!--            <li class="green"><a href="about.html" class="insidelink"><img src="images/icons/about.png" alt="" title="" /><span>About Us</span></a></li>-->
+                    <li class=bluegreen><a href="/detail" class="insidelink"><img src = "images/icons/keep.png" alt=""
+                                                                                           title=""/><span
+                            th:text="*{human.phoneNumber}"></span></a></li>
+                </ul>
+
+
+            </nav>
+            <div class="clear"></div>
+
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript" src="js/jquery.tabify.js"></script>
+<script type="text/javascript" src="js/jquery.swipebox.js"></script>
+<script type="text/javascript" src="js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="js/twitter/jquery.tweet.js" charset="utf-8"></script>
+<script src="js/email.js"></script>
+</body>
+</html>
