@@ -21,18 +21,21 @@
     <script src="js/code.js"></script>
     <script>
 
+        function fres() {
+            window.location.href = "/collect";
 
+        }
     </script>
 </head>
 <body>
 <script src="js/socket.js"></script>
 <script>
     function appInvoke(appId,appName) {
-        var data = { "appId": appId,"userId":"1","appName":appName}
+       /* // var data = { "appId": appId,"userId":"1","appName":appName}
         //post("/appInvoke",data);
         var temp = document.createElement("form");
         temp.action = "/appInstance";
-        temp.method = "post";
+        temp.method = "get";
         temp.style.display = "none";
         for (var x in data) {
             var opt = document.createElement("textarea");
@@ -41,7 +44,8 @@
             temp.appendChild(opt);
         }
         document.body.appendChild(temp);
-        temp.submit();
+        temp.submit();*/
+       console.log("hello")
     }
             /*  alert(appId)
                 console.log(appId);
@@ -72,9 +76,9 @@
             <div class="logo"><a href="#">人机物平台</a></div>
             <nav id="menu">
                 <ul>
-                <#list AppList as app>
-                    <li class="${app.color}"> <img src="${app.image}" alt=""
-                    title=""/><span>${app.name}</span></a></li>
+                <#list infoList as info>
+                    <li class="${info.color}"> <img src="${info.imageUrl}" alt=""
+                    title=""/><span>${info.infoName}</span></a></li>
                 </#list>
                 </ul>
             </nav>
@@ -93,21 +97,18 @@
         popArray.push(checkedArray.pop());
     }*/
     var li = document.getElementsByTagName("li");//这里返回的是多个，getElements很明显复数嘛
-    <#list AppList as app>
-          li[${app.no}].onclick = function(){
-        appInvoke("${app.id}","${app.name}");
-    }
-    </#list>
+   <#list infoList as info>
+   li[${info.infoId}].onclick = function(){
+       appInvoke("${info.infoId}","${info.infoName}");
+   }
+   </#list>
   /*  for(i=0;i<li.length;i++){
         li[i].onclick = function(){
             alert(checkedArray[i])
             appInvoke(checkedArray[i]);
         }
     }*/
-    function fres() {
-        window.location.href = "/collect";
 
-    }
 </script>
 <script type="text/javascript" src="js/jquery.tabify.js"></script>
 <script type="text/javascript" src="js/jquery.swipebox.js"></script>
