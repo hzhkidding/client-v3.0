@@ -20,48 +20,31 @@
     <script src="js/jquery.validate.min.js" type="text/javascript"></script>
     <script src="js/code.js"></script>
     <script>
-
         function fres() {
             window.location.href = "/collect";
-
         }
     </script>
 </head>
 <body>
 <script src="js/socket.js"></script>
 <script>
-    function appInvoke(appId,appName) {
-       /* // var data = { "appId": appId,"userId":"1","appName":appName}
-        //post("/appInvoke",data);
-        var temp = document.createElement("form");
-        temp.action = "/appInstance";
-        temp.method = "get";
-        temp.style.display = "none";
-        for (var x in data) {
-            var opt = document.createElement("textarea");
-            opt.name = x;
-            opt.value = data[x];
-            temp.appendChild(opt);
-        }
-        document.body.appendChild(temp);
-        temp.submit();*/
-       console.log("hello")
+    function getInfoDetail(infoId,infoName) {
+        var data = {"infoId": infoId, "infiName": infoName};
+        $.ajax({
+            url: '/getInfoDetail',
+            async: false,
+            // 请求方式
+            type: "post",
+            // contentType
+            contentType: "application/json",
+            // dataType
+            dataType: "json",
+            //data: {'baseprice':36,'demand':'0.5','id': 2,'num': 4},
+            // 把JS的对象或数组序列化一个json 字符串
+            data: JSON.stringify(data),
+            // result 为请求的返回结果对象
+        })
     }
-            /*  alert(appId)
-                console.log(appId);
-            datas = {'appId':appId,"userId":"123"};
-            $.ajax({
-                url: '/appInvoke',
-                async: true,
-                data: datas,
-                type: 'POST',
-                // jsonp : "jsonpCallback",//服务端用于接收callback调用的function名的参数*!/
-                success: function (data) {
-
-                }
-            })
-
-    }*/
 
 </script>
 
@@ -89,26 +72,12 @@
     </div>
 </div>
 <script>
-   /* var checkedArray =[];
-    //初始化将测试集包含的用例存在数组里面
-
-    /*var popArray =[];
-    for(i=0;i<checkedArray.length;i++){
-        popArray.push(checkedArray.pop());
-    }*/
     var li = document.getElementsByTagName("li");//这里返回的是多个，getElements很明显复数嘛
    <#list infoList as info>
    li[${info.infoId}].onclick = function(){
-       appInvoke("${info.infoId}","${info.infoName}");
+       getInfoDetail("${info.infoId}","${info.infoName}");
    }
    </#list>
-  /*  for(i=0;i<li.length;i++){
-        li[i].onclick = function(){
-            alert(checkedArray[i])
-            appInvoke(checkedArray[i]);
-        }
-    }*/
-
 </script>
 <script type="text/javascript" src="js/jquery.tabify.js"></script>
 <script type="text/javascript" src="js/jquery.swipebox.js"></script>

@@ -22,7 +22,8 @@ public class InfoResourceService {
     public List<Infomation> getInfoList() {
         JSONArray infoJsonArray = JSONArray.parseArray(httpInvoke.getInvoke(INFO_LIST_URL));
         List<Infomation> infoList = new ArrayList<>();
-
+        //设置颜色；
+        int random_index;
         for (int i = 0; i < infoJsonArray.size(); i++) {
             JSONObject infoJsonObj = infoJsonArray.getJSONObject(i);
             Infomation info = new Infomation();
@@ -32,6 +33,8 @@ public class InfoResourceService {
             info.setInfoId(infoId);
             info.setColor(COLOR[i%COLOR.length]);
             info.setImageUrl("images/icons/law.png");
+            random_index = (int) (Math.random()*COLOR.length);
+            info.setColor(COLOR[random_index]);
             infoList.add(info);
         }
         return infoList;

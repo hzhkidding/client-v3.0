@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.demo.Util.Constans.APP_STATUS_URL;
+import static com.example.demo.Util.Constans.COLOR;
 
 @Slf4j
 @Controller
@@ -40,10 +41,10 @@ public class AppController extends BaseController{
     @RequestMapping(path = {"/getAppList"}, method = RequestMethod.GET)
     public String getAllAppList(Model model) {
 
-        List<App> appList1 = appService.getAppList();
+        List<App> appListService = appService.getAppList();
         List<App> appList = new ArrayList<>();
-        for(int i =0;i<appList1.size();i++){
-            App app = appList1.get(i);
+        for(int i =0;i<appListService.size();i++){
+            App app = appListService.get(i);
             app.setNo(i);
             appList.add(app);
         }
