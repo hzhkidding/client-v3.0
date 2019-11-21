@@ -81,6 +81,10 @@ public class AppService {
     public AppDetail appInstance(String appId,String userId,Double X,Double Y){
 
 
+        JSONArray deviceListArray = new JSONArray();
+        List<String> deviceNameList = new ArrayList<>();
+        AppDetail appDetail = new AppDetail();
+
         MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
         map.add("app_class_id",appId);
         map.add("user_id",userId);
@@ -93,14 +97,21 @@ public class AppService {
         JSONObject appInstanceInfo = JSONObject.parseObject(appInstanceInfoString);
         JSONObject jsonObject = appInstanceInfo.getJSONObject("app_instance_resource");
         this.appInstanceId = jsonObject.getString("_id");
-        JSONArray deviceListArray = new JSONArray();
+        String aliaName = null;
         JSONObject deviceIdList = jsonObject.getJSONObject("resource");
-        for (Map.Entry<String, Object> entry : deviceIdList.entrySet()){
+        for (Map.Entry<String, Object> entry : deviceIdList.entrySet()) {
             deviceListArray.add(entry.getValue());
+            JSONObject deviceObj = (JSONObject) entry.getValue();
+            aliaName = deviceObj.getString("aliasName");
+            if (aliaName == null) {
+                deviceNameList.add("资源");
+                continue;
+            }
+            deviceNameList.add(aliaName);
+
         }
         this.deviceListArray = deviceListArray;
-        AppDetail appDetail = new AppDetail();
-
+        appDetail.setDeviceNameList(deviceNameList);
         appDetail.setAppDetailImage(appInstanceInfo.getString("process_version"));
         return appDetail;
     }

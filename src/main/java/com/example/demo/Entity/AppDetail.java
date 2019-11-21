@@ -10,5 +10,5 @@ public class AppDetail {
 
     public String appName;
     public String appDetailImage;
-    public List<String> deviceList;
+    public List<String> deviceNameList;
 }

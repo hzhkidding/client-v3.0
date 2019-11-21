@@ -58,7 +58,7 @@
                     <div class="trigger"><a href="#">可用资源列表</a></div>
                     <div class="toggle_container">
                         <ul>
-                            <#list AppDatail.deviceList as deviceName>
+                            <#list AppDatail.deviceNameList as deviceName>
                                 <li id="mkcoffee">${deviceName}</li>
                             </#list>
                         </ul>
