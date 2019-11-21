@@ -54,7 +54,7 @@
 
         <div class="sliderbg green">
             <div class="pages_container">
-                <h2 class="page_title">应用详情</h2>
+                <h2 class="page_title">应用执行中</h2>
                 <div class="image_single radius4"><img src="${AppDetail.appDetailImage}" alt="" title="" border="0"/></div>
                 <div class="image_caption blue blue_borderbottom radius4">${AppDetail.appName}</div>
 
