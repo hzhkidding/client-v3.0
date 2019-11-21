@@ -43,8 +43,10 @@ public class AppService {
     @Autowired
     AppController appController;
 
-
-    //获取全部应用概览
+    /**
+     * 获取应用列表
+     * @return
+     */
     public List<App> getAppList(){
         JSONObject appJson = JSONObject.parseObject(httpInvoke.getInvoke(APP_LIST_URL));
         JSONArray appJsonArray = (JSONArray) appJson.get("app_classes_introduction");
@@ -78,7 +80,15 @@ public class AppService {
        // System.out.println(appDetailJsonObj.toJSONString());
         return appDetailJsonObj;
     }*/
-    //应用实例化
+
+    /**
+     * 应用实例化
+     * @param appId
+     * @param userId
+     * @param X
+     * @param Y
+     * @return
+     */
     public AppDetail appInstance(String appId,String userId,Double X,Double Y){
 
 
@@ -91,10 +101,13 @@ public class AppService {
         map.add("user_id",userId);
         map.add("x",String.valueOf(X));
         map.add("y",String.valueOf(Y));
-
         String appInstanceInfoString = null;
-        appInstanceInfoString = httpInvoke.postInvoke(map,APP_INSTANCE_URL);
 
+        try {
+            appInstanceInfoString = httpInvoke.postInvoke(map,APP_INSTANCE_URL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         JSONObject appInstanceInfo = JSONObject.parseObject(appInstanceInfoString);
         JSONObject jsonObject = appInstanceInfo.getJSONObject("app_instance_resource");
         this.appInstanceId = jsonObject.getString("_id");
@@ -112,7 +125,12 @@ public class AppService {
         this.appDetail = appDetail;
         return appDetail;
     }
-    //应用调用
+
+    /**
+     * 应用调用
+     *
+     * @return List
+     */
     public List appInvoke() {
         appController.num = 0;
 

@@ -57,16 +57,11 @@ public class AppController extends BaseController{
     public String appInstance(Model model,@RequestParam("appId") String appId, @RequestParam("userId") String userId,@RequestParam("appName") String appName) {
 
         List<String>  deviceNameList= new ArrayList<>();
-        AppDetail appDetail = new AppDetail();
+        AppDetail appDetail;
         try {
             appDetail = appService.appInstance(appId, userId, this.X, this.Y);
         } catch (Exception e) {
-            appDetail.setAppDetailImage("images/nuapp.jpg");
-            appDetail.setAppName("应用开发中，敬请期待");
-            deviceNameList.add("应用开发中，敬请期待");
-            appDetail.setDeviceNameList(deviceNameList);
-            model.addAttribute("AppDatail",appDetail);
-            return "about";
+            return "noapp";
         }
         appDetail.setAppName(appName);
         model.addAttribute("AppDatail",appDetail);
@@ -76,10 +71,8 @@ public class AppController extends BaseController{
     @RequestMapping(path = {"/appInvoke"}, method = RequestMethod.GET)
     public String appInvoke(Model model) {
         //  String appInstanceId = this.appInstanceId;
-
         List<Action> actionList = appService.appInvoke();
         model.addAttribute("AppDetail",appService.appDetail);
-
         model.addAttribute("ActionList",actionList);
         return "appRunning";
     }

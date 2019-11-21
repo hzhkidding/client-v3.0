@@ -52,8 +52,8 @@ DeviceResourceService {
          * 传递wifi信号强度
          */
       //  log.info(phoneInfo);
+
         JSONObject labelXY = (JSONObject) JSONObject.parse(httpInvoke.postInvoke(phoneInfo,DEVICE_LABEL_URL));
-     //   System.out.println("hahahh"+labelXY.toJSONString());
         Double x = Double.valueOf(labelXY.getString("x"));
         Double y = Double.valueOf(labelXY.getString("y"));
         String room = labelXY.getString("room");

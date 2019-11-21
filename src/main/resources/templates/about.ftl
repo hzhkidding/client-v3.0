@@ -16,9 +16,6 @@
     <link type="text/css" rel="stylesheet" href="colors/metro/metro.css"/>
     <link type="text/css" rel="stylesheet" href="css/swipebox.css"/>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'/>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
     <script src="js/jquery.validate.min.js" type="text/javascript"></script>
     <title>人机物融合平台</title>
