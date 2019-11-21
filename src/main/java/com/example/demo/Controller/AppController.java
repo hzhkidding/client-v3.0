@@ -55,8 +55,22 @@ public class AppController extends BaseController{
     @RequestMapping(path = {"/appInstance"}, method = RequestMethod.POST)
     public String appInstance(Model model,@RequestParam("appId") String appId, @RequestParam("userId") String userId,@RequestParam("appName") String appName) {
 
-        AppDetail appDetail = appService.appInstance(appId, userId, this.X, this.Y);
+        List<String>  deviceNameList= new ArrayList<>();
+        AppDetail appDetail = new AppDetail();
+        try {
+            appDetail = appService.appInstance(appId, userId, this.X, this.Y);
+        } catch (Exception e) {
+            appDetail.setAppDetailImage("images/nuapp.jpg");
+            appDetail.setAppName("应用开发中，敬请期待");
+            deviceNameList.add("应用开发中，敬请期待");
+            appDetail.setDeviceList(deviceNameList);
+            model.addAttribute("AppDatail",appDetail);
+            return "about";
+        }
         appDetail.setAppName(appName);
+
+        deviceNameList.add("咖啡机");
+        appDetail.setDeviceList(deviceNameList);
         model.addAttribute("AppDatail",appDetail);
         return "about";
     }

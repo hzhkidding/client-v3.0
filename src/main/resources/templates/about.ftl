@@ -57,8 +57,10 @@
                 <div class="toogle_wrap radius8">
                     <div class="trigger"><a href="#">可用资源列表</a></div>
                     <div class="toggle_container">
-                        <ul class="listing_detailed myul">
-                            <li id="mkcoffee">咖啡机</li>
+                        <ul>
+                            <#list AppDatail.deviceList as deviceName>
+                                <li id="mkcoffee">${deviceName}</li>
+                            </#list>
                         </ul>
                     </div>
                 </div>

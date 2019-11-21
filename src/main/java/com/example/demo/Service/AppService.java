@@ -86,7 +86,10 @@ public class AppService {
         map.add("user_id",userId);
         map.add("x",String.valueOf(X));
         map.add("y",String.valueOf(Y));
-        String appInstanceInfoString = httpInvoke.postInvoke(map,APP_INSTANCE_URL);
+
+        String appInstanceInfoString = null;
+        appInstanceInfoString = httpInvoke.postInvoke(map,APP_INSTANCE_URL);
+
         JSONObject appInstanceInfo = JSONObject.parseObject(appInstanceInfoString);
         JSONObject jsonObject = appInstanceInfo.getJSONObject("app_instance_resource");
         this.appInstanceId = jsonObject.getString("_id");
@@ -97,6 +100,7 @@ public class AppService {
         }
         this.deviceListArray = deviceListArray;
         AppDetail appDetail = new AppDetail();
+
         appDetail.setAppDetailImage(appInstanceInfo.getString("process_version"));
         return appDetail;
     }

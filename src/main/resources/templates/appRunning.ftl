@@ -55,7 +55,7 @@
         <div class="sliderbg green">
             <div class="pages_container">
                 <h2 class="page_title">应用详情</h2>
-                <div class="image_single radius4"><img src="images/page_photo.jpg" alt="" title="" border="0"/></div>
+                <div class="image_single radius4"><img src="images/coffee_detail.jpg" alt="" title="" border="0"/></div>
                 <div class="image_caption blue blue_borderbottom radius4">喝咖啡</div>
 
 
@@ -70,15 +70,6 @@
                         </ul>
                     </div>
                 </div>
-                <h4>请选择需求度：0~1</h4>
-                <div class="mydiv">
-                    <input class="input-lg myslide" type="range" id="nd" min="0" max="1" step="0.01">
-                    <div class="mydiv" id="result"></div>
-                </div>
-
-
-                <a class="button_11 bluegreen bluegreen_borderbottom radius4" onclick="sendNeed3()">确定</a>
-
                 <div class="clearfix"></div>
 
             </div>

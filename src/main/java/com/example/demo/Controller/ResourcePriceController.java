@@ -78,6 +78,4 @@ public class ResourcePriceController extends BaseController{
         getFinalPrice.put("devices", appService.deviceListArray);
         return resourcePriceService.getFinalPrice(getFinalPrice);
     }
-
-
 }
