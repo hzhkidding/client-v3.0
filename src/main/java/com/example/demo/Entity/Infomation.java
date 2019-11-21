@@ -5,9 +5,11 @@ import lombok.Data;
 
 @Data
 public class Infomation {
-    public String InfoName;
-    public JSONArray APIArray;
-    public String InfoId;
+    public String infoName;
+    public JSONArray apiArray;
+    public String infoId;
+    public String color;
+    public String imageUrl;
 //    public String api;
 
 }
