@@ -51,16 +51,16 @@ public class AppController extends BaseController{
         return "app";
     }
 
+    //进入应用详情页
     @RequestMapping(path = {"/appInstance"}, method = RequestMethod.POST)
     public String appInstance(Model model,@RequestParam("appId") String appId, @RequestParam("userId") String userId,@RequestParam("appName") String appName) {
 
-        appService.appInstance(appId, userId, this.X, this.Y);
-        AppDetail appDetail = new AppDetail();
+        AppDetail appDetail = appService.appInstance(appId, userId, this.X, this.Y);
         appDetail.setAppName(appName);
         model.addAttribute("AppDatail",appDetail);
         return "about";
     }
-
+   //应用调用
     @RequestMapping(path = {"/appInvoke"}, method = RequestMethod.GET)
     public String appInvoke(Model model) {
         //  String appInstanceId = this.appInstanceId;

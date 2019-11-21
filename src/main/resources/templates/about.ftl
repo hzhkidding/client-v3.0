@@ -52,7 +52,7 @@
         <div class="sliderbg green">
             <div class="pages_container">
                 <h2 class="page_title">应用详情</h2>
-                <div class="image_single radius4"><img src="images/page_photo.jpg" alt="" title="" border="0"/></div>
+                <div class="image_single radius4"><img src="${AppDatail.appDetailImage}" alt="" title="" border="0"/></div>
                 <div class="image_caption blue blue_borderbottom radius4">${AppDatail.appName}</div>
                 <div class="toogle_wrap radius8">
                     <div class="trigger"><a href="#">可用资源列表</a></div>

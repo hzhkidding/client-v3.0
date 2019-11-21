@@ -6,6 +6,7 @@ import com.example.demo.Controller.AppController;
 import com.example.demo.Controller.ResourcePriceController;
 import com.example.demo.Entity.Action;
 import com.example.demo.Entity.App;
+import com.example.demo.Entity.AppDetail;
 import com.example.demo.Util.HttpInvoke;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +78,9 @@ public class AppService {
         return appDetailJsonObj;
     }*/
     //应用实例化
-    public String appInstance(String appId,String userId,Double X,Double Y){
+    public AppDetail appInstance(String appId,String userId,Double X,Double Y){
+
+
         MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
         map.add("app_class_id",appId);
         map.add("user_id",userId);
@@ -93,7 +96,9 @@ public class AppService {
             deviceListArray.add(entry.getValue());
         }
         this.deviceListArray = deviceListArray;
-        return appInstanceInfoString;
+        AppDetail appDetail = new AppDetail();
+        appDetail.setAppDetailImage(appInstanceInfo.getString("process_version"));
+        return appDetail;
     }
     //应用调用
     public List appInvoke() {

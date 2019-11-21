@@ -20,6 +20,8 @@ public class DeviceResourceController extends BaseController{
     @Autowired
     private DeviceResourceService deviceResourceService;
 
+
+    //获取设备资源
     @RequestMapping(path = {"/getDeviceResource"}, method = RequestMethod.GET)
     public String getDeviceResource(Model model) throws InterruptedException {
 

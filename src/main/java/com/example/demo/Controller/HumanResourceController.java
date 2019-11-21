@@ -36,6 +36,8 @@ public class HumanResourceController extends BaseController{
         return "redirect:/getHumanResource";
     }
 
+    //获取人力资源
+
     @RequestMapping(path = {"/getHumanResource"}, method = RequestMethod.GET)
     public String getHumanResource(Model model, HttpServletResponse response) {
 
@@ -44,7 +46,7 @@ public class HumanResourceController extends BaseController{
         return "human";
     }
 
-    //根据用户ID给人力资源发送消息
+    //根据用户手机号给人力资源发送消息
     @RequestMapping(path = {"/msg"}, method = RequestMethod.POST)
     @ResponseBody
     public void sendMsqgToHumanByPhone(@RequestBody String jsonObject) throws IOException {

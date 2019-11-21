@@ -51,9 +51,7 @@ public class ResourcePriceController extends BaseController{
         JSONObject exPriceJsonObj = JSONObject.parseObject(jsonObject);
 
         String expricejson = exPriceJsonObj.toJSONString();
-        System.out.println("sendExprice" + expricejson);
         JSONObject deviceId = exPriceJsonObj.getJSONObject("deviceId");
-        System.out.println(deviceId);
         JSONObject finalJson = new JSONObject();
         JSONObject refResource = new JSONObject();
         refResource.put("kind","Edge");
@@ -65,9 +63,6 @@ public class ResourcePriceController extends BaseController{
         resourceSpec.put("labels",labels);
         finalJson.put("refResource",refResource);
         finalJson.put("resourceSpec",resourceSpec);
-        System.out.println("最终json"+finalJson);
-
-
         resourcePriceService.sendExPrice(finalJson);
     }
 
