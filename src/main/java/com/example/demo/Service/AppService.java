@@ -30,6 +30,7 @@ public class AppService {
 
     @Autowired
     RestTemplate restTemplate;
+    public AppDetail appDetail;
 
     @Autowired
     HttpInvoke httpInvoke;
@@ -103,16 +104,12 @@ public class AppService {
             deviceListArray.add(entry.getValue());
             JSONObject deviceObj = (JSONObject) entry.getValue();
             aliaName = deviceObj.getString("aliasName");
-            if (aliaName == null) {
-                deviceNameList.add("资源");
-                continue;
-            }
             deviceNameList.add(aliaName);
-
         }
         this.deviceListArray = deviceListArray;
         appDetail.setDeviceNameList(deviceNameList);
         appDetail.setAppDetailImage(appInstanceInfo.getString("process_version"));
+        this.appDetail = appDetail;
         return appDetail;
     }
     //应用调用

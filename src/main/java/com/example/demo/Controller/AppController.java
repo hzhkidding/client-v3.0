@@ -77,6 +77,7 @@ public class AppController extends BaseController{
         //  String appInstanceId = this.appInstanceId;
 
         List<Action> actionList = appService.appInvoke();
+        model.addAttribute("AppDetail",appService.appDetail);
 
         model.addAttribute("ActionList",actionList);
         return "appRunning";
