@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class AppDetail {
 
-    private String appName;
-    private String appDetailImage;
-    private List<String> deviceList;
+    public String appName;
+    public String appDetailImage;
+    public List<String> deviceList;
 }

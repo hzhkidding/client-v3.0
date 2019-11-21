@@ -24,7 +24,9 @@ import static com.example.demo.Util.Constans.APP_STATUS_URL;
 @Controller
 public class AppController extends BaseController{
 
-   public int num = 0;
+    public AppDetail appDetail;
+
+    public int num = 0;
     @Autowired
     HttpInvoke httpInvoke;
 
@@ -60,17 +62,13 @@ public class AppController extends BaseController{
         try {
             appDetail = appService.appInstance(appId, userId, this.X, this.Y);
         } catch (Exception e) {
-            appDetail.setAppDetailImage("images/nuapp.jpg");
-            appDetail.setAppName("应用开发中，敬请期待");
-            deviceNameList.add("应用开发中，敬请期待");
-            appDetail.setDeviceList(deviceNameList);
-            model.addAttribute("AppDatail",appDetail);
-            return "about";
+            return "noapp";
         }
         appDetail.setAppName(appName);
 
         deviceNameList.add("咖啡机");
         appDetail.setDeviceList(deviceNameList);
+        this.appDetail = appDetail;
         model.addAttribute("AppDatail",appDetail);
         return "about";
     }
@@ -80,7 +78,7 @@ public class AppController extends BaseController{
         //  String appInstanceId = this.appInstanceId;
 
         List<Action> actionList = appService.appInvoke();
-
+        model.addAttribute("AppDetail",this.appDetail);
         model.addAttribute("ActionList",actionList);
         return "appRunning";
     }
