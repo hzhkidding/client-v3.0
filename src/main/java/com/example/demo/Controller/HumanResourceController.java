@@ -41,7 +41,7 @@ public class HumanResourceController extends BaseController{
 
         List<Human> humanList = humanResourceService.getHumanResource();
         model.addAttribute("HumanList", humanList);
-        return "human.ftl";
+        return "human";
     }
 
     //根据用户ID给人力资源发送消息

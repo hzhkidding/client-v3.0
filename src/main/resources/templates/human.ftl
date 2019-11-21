@@ -53,13 +53,6 @@
                   </#list>
               </ul>
 
-              <!--  </ul>
-
-                <ul th:each="human:${HumanList}">
-                    &lt;!&ndash;            <li class="green"><a href="about.html" class="insidelink"><img src="images/icons/about.png" alt="" title="" /><span>About Us</span></a></li>&ndash;&gt;
-                    <li class="bluegreen"><img src="images/icons/clients.png" alt="" title=""/><span
-                            th:text="*{human.phoneNumber}"></span></a></li>
-                </ul>-->
             </nav>
             <div class="clear"></div>
 
