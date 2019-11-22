@@ -61,6 +61,7 @@ public class AppController extends BaseController{
         try {
             appDetail = appService.appInstance(appId, userId, this.X, this.Y);
         } catch (Exception e) {
+            e.printStackTrace();
             return "noapp";
         }
         appDetail.setAppName(appName);
@@ -85,12 +86,12 @@ public class AppController extends BaseController{
         JSONArray jsonArray = JSONArray.parseArray(httpInvoke.postInvoke(map,APP_STATUS_URL));
         if(num != jsonArray.size()) {
             JSONObject jsonObject = jsonArray.getJSONObject(num);
-            log.info(jsonObject.getString("state"));
+            log.info("state=="+jsonObject.getString("state"));
             if (jsonObject.getString("state").equals("2")) {
                 log.info(jsonArray.toJSONString());
                 log.info(jsonObject.getString("action_name")+jsonObject.getString("state"));
                 num++;
-                log.info(String.valueOf(num));
+                log.info("num=="+num);
                 return String.valueOf(num);
             }
         }

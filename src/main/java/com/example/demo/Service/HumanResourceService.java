@@ -34,7 +34,7 @@ public class HumanResourceService {
             "\t\t\"bound\": false,\n" +
             "\t\t \"accessMode\": \"Exclusive\",\n" +
             "\t\t \"icon\": \"string\",\n" +
-            "\t\t \"description\": \"人力资源\"\n" +
+         /*   "\t\t \"description\": \"人力资源\"\n" +*/
             "\t\t}\n" +
             "}");
     @Autowired
@@ -53,7 +53,7 @@ public class HumanResourceService {
         resourceSpec.put("name", "human" + phoneNumber);
         resourceSpec.put("labels", labels);
         humanResourceRegJson.put("resourceSpec", resourceSpec);
-        httpInvoke.postInvoke(humanResourceRegJson.toJSONString(), HUMAN_RESOURCE_REG_URL);
+        System.out.println(httpInvoke.postInvoke(humanResourceRegJson.toJSONString(), HUMAN_RESOURCE_REG_URL));
 
     }
 

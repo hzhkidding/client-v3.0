@@ -18,9 +18,9 @@ public class BaseController {
 //这种方式处理异常只能返回页面路径，无法返回一个Responsebody形式,所以也要加上一个ResponseBody；
     public Object handlerException(HttpServletRequest request, Exception ex) {
         //判断一下如果Ex不是BussinessException
+        ex.printStackTrace();
         Map<String, Object> responseData = new HashMap<>();
         responseData.put("errMsg", "当前网络状态不稳定，请刷新页面重试");
-
         return  "当前网络状态不稳定，请刷新页面重试";
     }
 }

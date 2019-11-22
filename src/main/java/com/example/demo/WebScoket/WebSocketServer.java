@@ -100,7 +100,7 @@ public class WebSocketServer {
         System.out.println("发送消息"+message);
         try {
             //发送消息
-            session.getBasicRemote().sendText("SID:::" + session.getId() + ":::" + message);
+            session.getBasicRemote().sendText(":::" + message);
         } catch (IOException e) {
             //打印日志
             log.error("发送消息出错：", e.getMessage());

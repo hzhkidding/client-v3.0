@@ -103,11 +103,8 @@ public class AppService {
         map.add("y",String.valueOf(Y));
         String appInstanceInfoString = null;
 
-        try {
-            appInstanceInfoString = httpInvoke.postInvoke(map,APP_INSTANCE_URL);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        appInstanceInfoString = httpInvoke.postInvoke(map,APP_INSTANCE_URL);
+
         JSONObject appInstanceInfo = JSONObject.parseObject(appInstanceInfoString);
         JSONObject jsonObject = appInstanceInfo.getJSONObject("app_instance_resource");
         this.appInstanceId = jsonObject.getString("_id");

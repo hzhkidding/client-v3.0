@@ -84,7 +84,7 @@
     var myclear;
     function sendNeed() {
         console.log("999")
-        myclear =  setInterval("getStatus1()", 2000);
+        myclear =  setInterval("getStatus1()", 1000);
     }
     function getStatus1() {
         var exist = false;

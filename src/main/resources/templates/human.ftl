@@ -48,7 +48,7 @@
                 <ul>
                     <#list HumanList as human>
                     <li class="bluegreen"><img src="images/icons/clients.png" alt="" title=""/><span>
-                        ${human.phoneNumber}></span></a></li>
+                        ${human.phoneNumber}</span></a></li>
 
                   </#list>
               </ul>
