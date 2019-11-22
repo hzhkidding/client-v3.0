@@ -108,7 +108,7 @@
             data: JSON.stringify(jsonData),
             // result 为请求的返回结果对象
             success: function (result) {
-                var r = confirm("竞拍价为" + result + " , 是否接受？");
+                var r = confirm("竞拍价为" + parseInt(result) + " , 是否接受？");
                 if (r == true) {
                     window.location.href = "/appInvoke";
                 } else {

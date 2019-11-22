@@ -29,13 +29,29 @@
             font-size: 30px;
         }
 
-        .mybluegreen {
+        .mBlueGreen {
+            max-width: 80px; /*具体数值自行修改，下一行相同*/
+            max-height: 40px;
+            background-color: #06a78b;
+            overflow: hidden;
+            margin:10px
+            display:inline-block;
+
+        }
+
+        .mBlue {
+            background-color: #29aae3;
+            max-width: 80px; /*具体数值自行修改，下一行相同*/
+            max-height: 40px;
+            overflow: hidden;
+            margin:10px
+        }
+
+
+        .navPurple {
             background-color: #483D8B;
         }
 
-        .navPurple{
-            background-color:#483D8B;
-        }
         myDiv {
             filter: alpha(Opacity=50);
             -moz-opacity: 0.5;
@@ -78,7 +94,7 @@
             <div class="gohome radius20"><a id="homebutton"><img src="images/icons/home.png" alt="" title=""
                                                                  onclick="fres();"/></a></div>
 
-            <div class="logo"><a href="#">人机物平台</a></div>
+           <#-- <div class="logo"><a href="#">人机物平台</a></div>
             <nav id="menu">
                 <ul>
                     <li class="blue" onclick="reg()"><img src="images/icons/appMarket.png" alt=""
@@ -86,7 +102,7 @@
                     </li>
                 </ul>
 
-            </nav>
+            </nav>-->
             <div class="mylogo"><a href="#">平台人力资源列表</a></div>
 
             <div>
@@ -94,9 +110,13 @@
 
                     <ul>
                         <#list HumanList as human>
-                            <li class="mBlueGreen" ><img src="images/icons/clients.png" alt="" title="" height="25" width="40"/></a></li>
+                            <li class="mBlueGreen"><img src="images/icons/clients.png" alt="" title="" height="40"
+                                                        width="40"/></a></li>
 
                         </#list>
+                        <li class="mBlue" onclick="reg()"><img src="images/icons/appMarket.png" alt=""
+                                                               title="" height="40" width="40"/><span>注册</span></a>
+                        </li>
                     </ul>
                 </nav>
 
