@@ -14,6 +14,7 @@ public class Constans {
     public static final String APP_DETAIL_URL = "https://www.cpss2019.fun:5001/get_app_class_by_id";
     public static final String APP_INSTANCE_URL = "https://www.cpss2019.fun:5001/save_app_instance";
     public static final String APP_INVOKE_URL = "https://www.cpss2019.fun:5001/invoke_app_instance";
+    public static final String APP_DEL_INSTANCE_URL = "https://www.cpss2019.fun:5001/invoke_app_instance";
     public static final String COLOR[] = {"bluegreen", "yellow", "green", "red", "blue"};
     public static final String RESOURCES_BASEPRICE_URL="http://221.228.66.83:30480/basepricerecommending/";
     public static final String FINAL_PRICE_URL = "http://221.228.66.83:30480/bidpricerecommending";
