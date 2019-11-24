@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller/*@RequestMapping("/user") @CrossOrigin(origins = {"*"}, allowCredentials = "true")*/
 public class HomeController extends BaseController{
+
+
     public String test;
 
     @RequestMapping("/collect")

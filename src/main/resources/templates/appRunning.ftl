@@ -105,15 +105,6 @@
                 }
 
                 </#list>
-             /*   if (result == "1") {
-                    document.getElementById("mkcoffee").innerHTML = " 制作咖啡    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
-                }
-                if (result == "2") {
-                    document.getElementById("donecoffee").innerHTML = " 咖啡制作完成    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
-                }
-                if (result == "3") {
-                    document.getElementById("sendcoffe").innerHTML = " 播放语音通知    <img src=\"/images/icons/finish.jpg\" height=\"20\" width=\"20\"/>";
-                }*/
             }
         });
         if (exist) {

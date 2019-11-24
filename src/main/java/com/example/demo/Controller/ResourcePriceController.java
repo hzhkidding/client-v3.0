@@ -19,7 +19,7 @@ public class ResourcePriceController extends BaseController{
     @Autowired
     AppService appService;
     private String deviceId;
-    private Double BasePrice;
+    private Double basePrice;
     @Autowired
     ResourcePriceService resourcePriceService;
 
@@ -41,7 +41,7 @@ public class ResourcePriceController extends BaseController{
         //userDevicePrice.put("userId",userId);
         System.out.println(userDevicePrice.get("cost"));
         Double basePrice = resourcePriceService.getBaseprice(userDevicePrice);
-        BasePrice = basePrice;
+        this.basePrice = basePrice;
         return basePrice;
     }
 

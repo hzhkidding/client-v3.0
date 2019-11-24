@@ -25,7 +25,7 @@ import static com.example.demo.Util.Constans.COLOR;
 @Controller
 public class AppController extends BaseController{
 
-   public int num = 0;
+    public int num = 0;
     @Autowired
     HttpInvoke httpInvoke;
 
@@ -66,7 +66,7 @@ public class AppController extends BaseController{
         }
         appDetail.setAppName(appName);
         model.addAttribute("AppDatail",appDetail);
-        return "about";
+        return "test";
     }
    //应用调用
     @RequestMapping(path = {"/appInvoke"}, method = RequestMethod.GET)

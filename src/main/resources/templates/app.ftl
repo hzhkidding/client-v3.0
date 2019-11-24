@@ -73,7 +73,7 @@
             <nav id="menu">
                 <ul>
                 <#list AppList as app>
-                    <li class="${app.color}"> <img src="${app.image}" alt=""
+                    <li class="${app.color} img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc"> <img src="${app.image}" alt=""
                     title=""/><span>${app.name}</span></a></li>
                 </#list>
                 </ul>
