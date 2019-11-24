@@ -27,4 +27,9 @@ public class HomeController extends BaseController{
 
         return "configuration";
     }
+
+    @RequestMapping("/" )
+    public String index(){
+        return "configuration";
+    }
 }

@@ -19,10 +19,7 @@
     <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
     <script src="js/jquery.validate.min.js" type="text/javascript"></script>
     <script src="js/code.js"></script>
-    <script>
 
-
-    </script>
 </head>
 <body>
 <script src="js/socket.js"></script>
@@ -66,7 +63,7 @@
     <div id="content">
 
         <div class="sliderbg_menu">
-            <div class="gohome radius20"><a id="homebutton"><img src="images/icons/home.png" alt="" title=""
+            <div class="gomenu radius20"><a id="homebutton"><img src="images/icons/home.png" alt="" title=""
                                                                  onclick="fres();"/></a></div>
 
             <div class="logo"><a href="#">人机物平台</a></div>

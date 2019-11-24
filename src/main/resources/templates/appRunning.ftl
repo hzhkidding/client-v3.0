@@ -37,7 +37,7 @@
     <script>
 
         function fres() {
-            window.location.href = "/getAppList";
+            window.location.href = "/collect";
 
         }
     </script>
@@ -47,7 +47,7 @@
 
     <div id="content">
         <div id="header">
-            <div class="gohome radius20"><a id="homebutton"><img src="images/icons/home.png" alt="" title=""
+            <div class="gomenu radius20"><a id="homebutton"><img src="images/icons/home.png" alt="" title=""
                                                                  onclick="fres();"/></a></div>
         </div>
 
