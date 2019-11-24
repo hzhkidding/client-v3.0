@@ -32,10 +32,12 @@
         .mBlueGreen {
             max-width: 80px; /*具体数值自行修改，下一行相同*/
             max-height: 40px;
+
             background-color: #06a78b;
+            /*background-color:#E8E8E8;*/
             overflow: hidden;
-            margin:10px
-            display:inline-block;
+            margin: 10px
+            display: inline-block;
 
         }
 
@@ -44,7 +46,16 @@
             max-width: 80px; /*具体数值自行修改，下一行相同*/
             max-height: 40px;
             overflow: hidden;
-            margin:10px
+            margin: 10px
+        }
+
+        .mYellow {
+            background-color: #00B2EE;
+            max-width: 7rem; /*具体数值自行修改，下一行相同*/
+            max-width: 80px; /*具体数值自行修改，下一行相同*/
+            max-height: 40px;
+            overflow: hidden;
+            margin: 10px
         }
 
 
@@ -79,6 +90,11 @@
 
     }
 
+    function more() {
+        window.location.href = "/register";
+
+    }
+
     function fres() {
         window.location.href = "/resource";
 
@@ -94,28 +110,27 @@
             <div class="gohome radius20"><a id="homebutton"><img src="images/icons/home.png" alt="" title=""
                                                                  onclick="fres();"/></a></div>
 
-           <#-- <div class="logo"><a href="#">人机物平台</a></div>
-            <nav id="menu">
-                <ul>
-                    <li class="blue" onclick="reg()"><img src="images/icons/appMarket.png" alt=""
-                                                          title=""/><span>人资源注册</span></a>
-                    </li>
-                </ul>
-
-            </nav>-->
             <div class="mylogo"><a href="#">平台人力资源列表</a></div>
 
             <div>
                 <nav id="menu" class="navPurple">
 
                     <ul>
+                        <#assign count=1/>
                         <#list HumanList as human>
-                            <li class="mBlueGreen"><img src="images/icons/clients.png" alt="" title="" height="40"
-                                                        width="40"/></a></li>
-
+                        <#--                            <#assign imgsrc="images/icons/"+"clients"+".png"/>-->
+                            <#assign imgsrc="images/icons/"+"a"+count+".jpg"/>
+                            <li class="mBlueGreen"><img src=${imgsrc} alt="" title="" height="40"
+                                                        width="40"/>${human.phoneNumber}</a>
+                            </li>
+                            <#assign count=count+1/>
+                            <#if count==7><#break ></#if>
                         </#list>
+                        <li class="mYellow" onclick="more()"><img src="images/icons/apos.jpg" alt=""
+                                                                  title="" height="40" width="40"/>更多</a>
+                        </li>
                         <li class="mBlue" onclick="reg()"><img src="images/icons/appMarket.png" alt=""
-                                                               title="" height="40" width="40"/><span>注册</span></a>
+                                                               title="" height="40" width="40"/>注册</a>
                         </li>
                     </ul>
                 </nav>
