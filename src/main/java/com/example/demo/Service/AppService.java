@@ -157,4 +157,13 @@ public class AppService {
         }
         return actionList;
     }
+    public void delAppInstance(String appInstanceId) {
+        MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
+        map.add("app_instance_id",this.appInstanceId);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
+       httpInvoke.postInvoke(map,APP_DEL_INSTANCE_URL);
+
+    }
 }

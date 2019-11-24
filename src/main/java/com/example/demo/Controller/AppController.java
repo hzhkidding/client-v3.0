@@ -68,6 +68,12 @@ public class AppController extends BaseController{
         model.addAttribute("AppDatail",appDetail);
         return "test";
     }
+    @RequestMapping(path = {"/appInstance"}, method = RequestMethod.DELETE)
+    public String delAppInstance(@RequestParam("appInstanceId") String appInstanceId) {
+        appService.delAppInstance(appInstanceId);
+
+        return "test";
+    }
    //应用调用
     @RequestMapping(path = {"/appInvoke"}, method = RequestMethod.GET)
     public String appInvoke(Model model) {
