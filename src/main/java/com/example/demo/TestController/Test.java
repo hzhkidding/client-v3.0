@@ -22,10 +22,11 @@ public class Test {
 
 
     //异步请求调试
-    @RequestMapping(path = {"/humanResourceRegTest"},method = RequestMethod.POST)
+    @RequestMapping(path = {"/test3"},method = RequestMethod.POST)
     @ResponseBody
-    public void callBackFor(HttpServletRequest request, @RequestBody String jsonObject) {
-        log.info(jsonObject);
+    public void callBackFor(HttpServletRequest request) {
+
+     System.out.println("test3");
     }
     @RequestMapping(path = {"/deviceResouceTest"},method = RequestMethod.GET)
     @ResponseBody

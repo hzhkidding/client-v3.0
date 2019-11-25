@@ -99,7 +99,7 @@
                                 在这里添加一些文本
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                                <button type="button" class="btn btn-default" data-dismiss="modal" >取消
                                 </button>
                                 <button type="button" class="btn btn-primary" onclick="appInvoke()">
                                                      确定
@@ -159,7 +159,11 @@
         })
     }
     function appInvoke() {
-       window.location.href = "/appInvoke";
+
+         window.location.href = "/appInvoke/"+${appInstanceId};
+    }
+    function delAppInstance(appInstanceId) {
+        window.location.href = "/delAppInstance/"+${appInstanceId};
     }
 </script>
 

@@ -20,6 +20,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -89,9 +90,9 @@ public class AppService {
      * @param Y
      * @return
      */
-    public AppDetail appInstance(String appId,String userId,Double X,Double Y){
+    public Map<String,Object> appInstance(String appId,String userId,Double X,Double Y){
 
-
+        Map<String,Object> returnMap = new HashMap();
         JSONArray deviceListArray = new JSONArray();
         List<String> deviceNameList = new ArrayList<>();
         AppDetail appDetail = new AppDetail();
@@ -107,7 +108,8 @@ public class AppService {
 
         JSONObject appInstanceInfo = JSONObject.parseObject(appInstanceInfoString);
         JSONObject jsonObject = appInstanceInfo.getJSONObject("app_instance_resource");
-        this.appInstanceId = jsonObject.getString("_id");
+      //  this.appInstanceId = jsonObject.getString("_id");
+        returnMap.put("appInstanceId",jsonObject.getString("_id"));
         String aliaName = null;
         JSONObject deviceIdList = jsonObject.getJSONObject("resource");
         for (Map.Entry<String, Object> entry : deviceIdList.entrySet()) {
@@ -120,7 +122,8 @@ public class AppService {
         appDetail.setDeviceNameList(deviceNameList);
         appDetail.setAppDetailImage(appInstanceInfo.getString("process_version"));
         this.appDetail = appDetail;
-        return appDetail;
+        returnMap.put("appDetail",appDetail);
+        return returnMap;
     }
 
     /**
@@ -128,11 +131,10 @@ public class AppService {
      *
      * @return List
      */
-    public List appInvoke() {
+    public List appInvoke(String appInstanceId) {
         appController.num = 0;
-
         MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
-        map.add("app_instance_id",this.appInstanceId);
+        map.add("app_instance_id",appInstanceId);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);

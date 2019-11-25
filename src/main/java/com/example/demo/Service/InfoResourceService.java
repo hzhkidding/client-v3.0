@@ -17,28 +17,30 @@ public class InfoResourceService {
     @Autowired
     HttpInvoke httpInvoke;
 
-
-
     public List<Infomation> getInfoList() {
-        JSONArray infoJsonArray = JSONArray.parseArray(httpInvoke.getInvoke(INFO_LIST_URL));
+        JSONArray infoJsonArray = JSONArray.parseArray(httpInvoke.getInvoke(DEVICE_RESOURCE_URL));
         List<Infomation> infoList = new ArrayList<>();
-        //设置颜色；
-        int random_index;
         for (int i = 0; i < infoJsonArray.size(); i++) {
             JSONObject infoJsonObj = infoJsonArray.getJSONObject(i);
-            Infomation info = new Infomation();
-            info.setInfoName(infoJsonObj.get("apkName").toString());
-            info.setApiArray(JSONArray.parseArray(infoJsonObj.get("apiInfo").toString()));
-            String infoId = infoJsonObj.get("dexName").toString().substring(0, infoJsonObj.get("dexName").toString().indexOf("."));
-            info.setInfoId(infoId);
-            info.setColor(COLOR[i%COLOR.length]);
-            info.setImageUrl("images/icons/law.png");
-            random_index = (int) (Math.random()*COLOR.length);
-            info.setColor(COLOR[random_index]);
-            infoList.add(info);
+            if(infoJsonObj.getString("kind").equals("Service")) {
+                Infomation info = new Infomation();
+                info.setInfoName(infoJsonObj.getString("aliasName"));
+                info.setInfoId(getInfoId(infoJsonObj));
+                //info.setApiArray(JSONArray.parseArray(infoJsonObj.get("apiInfo").toString()));
+                info.setImageUrl("images/icons/law.png");
+                infoList.add(info);
+            }
         }
         return infoList;
 
+    }
+    public String getInfoId(JSONObject infoJsonObj){
+        JSONObject infoId = new JSONObject();
+        infoId.put("uid", infoJsonObj.getString("uid"));
+        infoId.put("namespace", infoJsonObj.getString("namespace"));
+        infoId.put("kind", infoJsonObj.getString("kind"));
+        infoId.put("name", infoJsonObj.getString("name"));
+        return infoId.toJSONString();
     }
 
 }

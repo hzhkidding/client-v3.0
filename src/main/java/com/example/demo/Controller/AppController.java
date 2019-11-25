@@ -14,12 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Map;
 import static com.example.demo.Util.Constans.APP_STATUS_URL;
-import static com.example.demo.Util.Constans.COLOR;
 
 @Slf4j
 @Controller
@@ -58,27 +56,30 @@ public class AppController extends BaseController{
 
         List<String>  deviceNameList= new ArrayList<>();
         AppDetail appDetail;
+        Map map;
         try {
-            appDetail = appService.appInstance(appId, userId, this.X, this.Y);
+            map = appService.appInstance(appId, userId, this.X, this.Y);
+            appDetail = (AppDetail) map.get("appDetail");
         } catch (Exception e) {
             e.printStackTrace();
             return "noapp";
         }
         appDetail.setAppName(appName);
         model.addAttribute("AppDatail",appDetail);
+        model.addAttribute("appInstanceId",map.get("appInstanceId"));
         return "test";
     }
-    @RequestMapping(path = {"/appInstance"}, method = RequestMethod.DELETE)
-    public String delAppInstance(@RequestParam("appInstanceId") String appInstanceId) {
+    @RequestMapping(path = {"/delAppInstance/{appInstanceId}"}, method = RequestMethod.DELETE)
+    public String delAppInstance(@PathVariable("appInstanceId") String appInstanceId) {
         appService.delAppInstance(appInstanceId);
-
-        return "test";
+        return "app";
     }
    //应用调用
-    @RequestMapping(path = {"/appInvoke"}, method = RequestMethod.GET)
-    public String appInvoke(Model model) {
+    @RequestMapping(path = {"/appInvoke/{appInstanceId}"}, method = RequestMethod.GET)
+    public String appInvoke(Model model,@PathVariable("appInstanceId") String appInstanceId) {
         //  String appInstanceId = this.appInstanceId;
-        List<Action> actionList = appService.appInvoke();
+        System.out.println(appInstanceId);
+        List<Action> actionList = appService.appInvoke(appInstanceId);
         model.addAttribute("AppDetail",appService.appDetail);
         model.addAttribute("ActionList",actionList);
         return "appRunning";
