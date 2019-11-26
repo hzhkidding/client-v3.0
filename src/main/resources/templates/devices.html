@@ -121,13 +121,13 @@
             // ctx.fillRect(deviceList[i][0], deviceList[i][1], rectLong, rectLong);
             // 设置设备名称
             ctx.beginPath();
-            ctx.arc(deviceList[i][0],deviceList[i][1],rectLong,0,2*Math.PI,true);
+            ctx.arc(deviceList[i][0], deviceList[i][1], rectLong, 0, 2 * Math.PI, true);
             ctx.closePath();
             // ctx.stroke();
             ctx.fillStyle = colorList[deviceList[i][3]];
             ctx.fill();
             //console.log(deviceList[i][4].length);
-            ctx.fillText(deviceList[i][4], deviceList[i][0]-MaxRound, deviceList[i][1] + MaxRound*2, deviceList[i][1] + MaxRound);
+            ctx.fillText(deviceList[i][4], deviceList[i][0] - MaxRound, deviceList[i][1] + MaxRound * 2, deviceList[i][1] + MaxRound);
             ctx.globalCompositeOperation = "source-over"; //全局合成操作
 
         }
@@ -149,14 +149,14 @@
         var deviceNo;
         var name;
         for (var i = 0; i < deviceList.length; i++) {
-            if (x >= deviceList[i][0]-MaxRound && x <= deviceList[i][0] + MaxRound && y >= deviceList[i][1]-MaxRound && y <= deviceList[i][1] + MaxRound) {
+            if (x >= deviceList[i][0] - MaxRound && x <= deviceList[i][0] + MaxRound && y >= deviceList[i][1] - MaxRound && y <= deviceList[i][1] + MaxRound) {
                 deviceNo = deviceList[i][2];
                 name = deviceList[i][5];
                 break;
             }
         }
         // 需要传输的数据
-        var jsonData = {"cost": 0, "deviceId": deviceNo,"name": name, "status": "Pending"};
+        var jsonData = {"cost": 0, "deviceId": deviceNo, "name": name, "status": "Pending"};
 
         $.ajax({
             url: '/sendCost',
@@ -172,10 +172,11 @@
             // result 为请求的返回结果对象
             success: function (result) {
 
-                var exprice = prompt("建议起拍价为 " + result + " ,请输入您的起拍价", result);
-                if (exprice != null && exprice != "") {
-                    var jsonPrice = {"exPrice": exprice, "deviceId": deviceNo, "status": "Pending"};
 
+                $.MsgBox.Confirm("温馨提示", "建议起拍价为 " + result + " ,是否确认", send);
+
+                function send() {
+                    var jsonPrice = {"exPrice": result, "deviceId": deviceNo, "status": "Pending"};
                     $.ajax({
                         url: '/sendExPrice',
                         async: true,
@@ -192,11 +193,9 @@
                             console.log(result)
                         }
                     })
-
-
-                } else {
-                    alert("请输入起拍价");
                 }
+
+
 
             }
         })

@@ -27,7 +27,8 @@ if(phoneNumber) {
         };
         //收到消息事件
         socket.onmessage = function (msg) {
-            alert(msg.data);
+            // alert(msg.data);
+            $.MsgBox.Alert("消息", msg.data)
             console.log(msg.data);
         };
         //连接关闭事件
@@ -36,7 +37,9 @@ if(phoneNumber) {
         };
         //发生了错误事件
         socket.onerror = function () {
-            alert("Socket发生了错误");
+            // alert("Socket发生了错误");
+            $.MsgBox.Alert("消息", "Socket发生了错误")
+
         }
         //窗口关闭时，关闭连接
         window.unload = function () {

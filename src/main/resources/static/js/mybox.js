@@ -24,7 +24,7 @@
             _html += '<input id="mb_btn_ok" type="button" value="确定" />';
         }
         if (type == "confirm") {
-            _html += '<input id="mb_btn_ok" type="button" value="接受" />';
+            _html += '<input id="mb_btn_ok" type="button" value="确定" />';
             _html += '<input id="mb_btn_no" type="button" value="取消" />';
         }
         _html += '</div></div>';
