@@ -81,7 +81,7 @@
     c7.height = document.documentElement.clientWidth;
     var cW = c7.offsetWidth;    // 获取元素宽度
     var imgObj = new Image();
-    imgObj.src = "images/pku.png";
+    imgObj.src = "images/wenjin.png";
     var imgW = '';
     var imgH = '';
 
@@ -151,7 +151,7 @@
             if (x >= deviceList[i][0]-MaxRound && x <= deviceList[i][0] + MaxRound && y >= deviceList[i][1]-MaxRound && y <= deviceList[i][1] + MaxRound) {
                 deviceNo = deviceList[i][2];
                 //输入成本弹窗
-                cost = prompt("请输入成本", "￥0.0");
+                // cost = prompt("请输入成本", "￥0.0");
                 break;
             }
 
@@ -160,7 +160,7 @@
 
 
         // 需要传输的数据
-        var jsonData = {"cost": cost, "deviceId": deviceNo, "status": "Pending"};
+        var jsonData = {"cost": 0, "deviceId": deviceNo, "status": "Pending"};
 
         $.ajax({
             url: '/sendCost',
