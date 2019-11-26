@@ -19,6 +19,6 @@ public class Constans {
     public static final String RESOURCES_BASEPRICE_URL="http://221.228.66.83:30480/basepricerecommending/";
     public static final String FINAL_PRICE_URL = "http://221.228.66.83:30480/bidpricerecommending";
     public static final String APP_STATUS_URL = "https://www.cpss2019.fun:5001/get_app_instance_action_state_and_resource_by_instance_id";
-
+    public static final String PROVINCES[] = {"北京", "上海", "广东", "江苏", "福建","浙江","安徽","河北","四川","湖南"};
     public static final String INFO_LIST_URL="http://127.0.0.1:8888/getInfoList";
 }

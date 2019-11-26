@@ -18,9 +18,11 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 
 import static com.example.demo.Util.Constans.HUMAN_RESOURCE_REG_URL;
+import static com.example.demo.Util.Constans.PROVINCES;
 
 @Slf4j
 @Service
@@ -34,7 +36,7 @@ public class HumanResourceService {
             "\t\t\"bound\": false,\n" +
             "\t\t \"accessMode\": \"Exclusive\",\n" +
             "\t\t \"icon\": \"string\",\n" +
-         /*   "\t\t \"description\": \"人力资源\"\n" +*/
+            /*   "\t\t \"description\": \"人力资源\"\n" +*/
             "\t\t}\n" +
             "}");
     @Autowired
@@ -50,6 +52,8 @@ public class HumanResourceService {
         JSONObject labels = new JSONObject();
         JSONObject resourceSpec = (JSONObject) humanResourceRegJson.get("resourceSpec");
         labels.put("io.fusionapp.crowdsourcing/phone", phoneNumber);
+        String province = PROVINCES[new Random().nextInt(PROVINCES.length)];
+        labels.put("io.fusionapp.crowdsourcing/province", province);
         resourceSpec.put("name", "human" + phoneNumber);
         resourceSpec.put("labels", labels);
         humanResourceRegJson.put("resourceSpec", resourceSpec);
