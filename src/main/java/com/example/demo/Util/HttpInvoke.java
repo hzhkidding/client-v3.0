@@ -51,7 +51,10 @@ public class HttpInvoke {
 
     public String getInvoke(String url) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        restTemplate.getMessageConverters().set(1,new StringHttpMessageConverter(StandardCharsets.UTF_8));
+        MediaType type = MediaType.parseMediaType("application/json;charset=UTF-8");
+        headers.setContentType(type);
+        headers.add("Accept", MediaType.APPLICATION_JSON.toString());
         return restTemplate.getForEntity(url, String.class).getBody();
     }
 

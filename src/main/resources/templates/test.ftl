@@ -160,11 +160,24 @@
     }
     function appInvoke() {
 
-         window.location.href = "/appInvoke/"+${appInstanceId};
+        var data = { "appInstanceId": "${appInstanceId}"}
+        //post("/appInvoke",data);
+        var temp = document.createElement("form");
+        temp.action = "/appInvoke";
+        temp.method = "post";
+        temp.style.display = "none";
+        for (var x in data) {
+            var opt = document.createElement("textarea");
+            opt.name = x;
+            opt.value = data[x];
+            temp.appendChild(opt);
+        }
+        document.body.appendChild(temp);
+        temp.submit();
     }
-    function delAppInstance(appInstanceId) {
+   /* function delAppInstance(appInstanceId) {
         window.location.href = "/delAppInstance/"+${appInstanceId};
-    }
+    }*/
 </script>
 
 <script type='text/javascript'>

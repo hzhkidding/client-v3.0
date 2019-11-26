@@ -40,7 +40,6 @@ public class InfoResourceService {
         infoId.put("namespace", infoJsonObj.getString("namespace"));
         infoId.put("kind", infoJsonObj.getString("kind"));
         infoId.put("name", infoJsonObj.getString("name"));
-        System.out.println(infoId.toString());
         return infoId.toJSONString();
     }
 
