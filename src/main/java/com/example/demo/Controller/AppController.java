@@ -67,7 +67,7 @@ public class AppController extends BaseController{
         appDetail.setAppName(appName);
         model.addAttribute("AppDatail",appDetail);
         model.addAttribute("appInstanceId",map.get("appInstanceId"));
-        return "test";
+        return "newabout";
     }
     @RequestMapping(path = {"/delAppInstance/{appInstanceId}"}, method = RequestMethod.DELETE)
     public String delAppInstance(@PathVariable("appInstanceId") String appInstanceId) {

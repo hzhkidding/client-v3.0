@@ -115,37 +115,18 @@
             success: function (result) {
                 // var r = confirm("竞拍价为" + parseInt(result) + " , 是否接受？");
                 // var r=confirm(result);
-
-                r=$.MsgBox.Confirm("温馨提示", "竞拍价为" + parseInt(result) + " , 是否接受？");
-                console.log(r);
-                if (r == true) {
-                    window.location.href = "/appInvoke";
-                } else {
-                    // alert("再见");
-                    // window.location.href = "/app";
+                function send(){
+                    appInvoke()
                 }
+                $.MsgBox.Confirm("温馨提示", "竞拍价为" + parseInt(result) + " , 是否接受？",send);
+
+
 
             }
         })
 
     }
 
-    function sendNeed2() {
-
-        var result = 22;
-        var num = 5;
-        var r = confirm("当前竞拍人数为" + num + ", 竞拍价为" + result + " , 是否接受？");
-        if (r == true) {
-            // window.location.href = "/appInvoke";
-            setTimeout("test1()", "2000");
-
-
-        } else {
-            alert("再见");
-            // window.location.href = "/app";
-        }
-
-    }
 
 
 
@@ -160,6 +141,26 @@
         });
 
     })
+</script>
+<script>
+    function appInvoke() {
+
+        var data = { "appInstanceId": "${appInstanceId}"}
+        //post("/appInvoke",data);
+        var temp = document.createElement("form");
+        temp.action = "/appInvoke";
+        temp.method = "post";
+        temp.style.display = "none";
+        for (var x in data) {
+            var opt = document.createElement("textarea");
+            opt.name = x;
+            opt.value = data[x];
+            temp.appendChild(opt);
+        }
+        document.body.appendChild(temp);
+        temp.submit();
+    }
+
 </script>
 
 </html>
