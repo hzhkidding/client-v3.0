@@ -29,6 +29,9 @@
         body {
             background-color: #06a78b;
         }
+        .myform{
+            padding: 0 0 15px 0;
+        }
     </style>
 </head>
 <body>
@@ -42,22 +45,10 @@
         <div class="sliderbg bluegreen">
             <div class="pages_container">
 
-                <h2 class="page_title">Get in touch</h2>
+                <h2 class="page_title">人力资源注册</h2>
                 <h2 id="Note"></h2>
-                <div class="form">
-                    <!-- <form class="cmxform" id="CommentForm" method="post" action="/reg">
-                     <label>Name:</label>
-                     <input type="text" name="applicationName" id="applicationName" value="" class="form_input radius4 required" />
-                     <label>image:</label>
-                     <input type="text" name="image" id="image" value="" class="form_input radius4 required" />
-                     <label>color:</label>
-                         <input type="text" name="color" id="color" value="" class="form_input radius4 required" />
-                     <input type="submit" name="submit" class="form_submit radius4 green green_borderbottom" id="submit" value="Register" />
-                         &lt;!&ndash;<button class="form_submit radius4 green green_borderbottom" type="submit" onclick="form=document.getElementById('CommentForm');form.action='/reg'">注册</button>&ndash;&gt;
-                     <input class="" type="hidden" name="to"  value="youremail@website.com" />
-                     <input class="" type="hidden" name="subject" value="Contacf form message" />
-                     <label id="loader" style="display:none;"><img src="images/loader.gif" alt="Loading..." id="LoadingGraphic" /></label>
-                     </form>-->
+                <div class="myform">
+
                     <form action="/humanResourceReg" id="regloginform" method="post">
                         <input type="hidden" name="_xsrf" value="21aa1c8d254df2899b23ab9afbd62a53">
                         <div class="group-inputs">

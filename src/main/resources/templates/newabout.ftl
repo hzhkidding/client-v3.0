@@ -37,6 +37,9 @@
         .myul {
             font-size: 10pt
         }
+        body{
+            background-color:#85af5d ;
+        }
     </style>
     <script>
         function fres() {
@@ -118,7 +121,8 @@
                 function send(){
                     appInvoke()
                 }
-                $.MsgBox.Confirm("温馨提示", "竞拍价为" + parseInt(result) + " , 是否接受？",send);
+                var num=3;
+                $.MsgBox.Confirm("温馨提示", "当前竞拍人数为 "+num+" 人,竞拍价为 " + parseInt(result) + "",send);
 
 
 

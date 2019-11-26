@@ -24,7 +24,7 @@
             _html += '<input id="mb_btn_ok" type="button" value="确定" />';
         }
         if (type == "confirm") {
-            _html += '<input id="mb_btn_ok" type="button" value="确定" />';
+            _html += '<input id="mb_btn_ok" type="button" value="接受" />';
             _html += '<input id="mb_btn_no" type="button" value="取消" />';
         }
         _html += '</div></div>';
@@ -50,7 +50,7 @@
         });
 
         $("#mb_msg").css({ padding: '20px', lineHeight: '20px',
-            borderBottom: '1px dashed #DDD', fontSize: '13px',color:'black'
+            borderBottom: '1px dashed #DDD', fontSize: '20px',color:'black'
         });
 
         $("#mb_ico").css({ display: 'block', position: 'absolute', right: '10px', top: '9px',
