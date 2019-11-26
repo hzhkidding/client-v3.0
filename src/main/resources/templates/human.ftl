@@ -120,16 +120,16 @@
                         <#list HumanList as human>
                         <#--                            <#assign imgsrc="images/icons/"+"clients"+".png"/>-->
                             <#assign imgsrc="images/icons/"+"a"+count+".jpg"/>
-                            <li class="mBlueGreen"><img src=${imgsrc} alt="" title="" height="40"
+                            <li class="mBlueGreen img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc"><img src=${imgsrc} alt="" title="" height="40"
                                                         width="40"/>${human.phoneNumber}</a>
                             </li>
                             <#assign count=count+1/>
                             <#if count==7><#break ></#if>
                         </#list>
-                        <li class="mYellow" onclick="more()"><img src="images/icons/apos.jpg" alt=""
+                        <li class="mYellow img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc" onclick="more()"><img src="images/icons/apos.jpg" alt=""
                                                                   title="" height="40" width="40"/>更多</a>
                         </li>
-                        <li class="mBlue" onclick="reg()"><img src="images/icons/appMarket.png" alt=""
+                        <li class="mBlue img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc" onclick="reg()"><img src="images/icons/appMarket.png" alt=""
                                                                title="" height="40" width="40"/>注册</a>
                         </li>
                     </ul>
