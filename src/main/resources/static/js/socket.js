@@ -1,4 +1,6 @@
 var userId;
+document.write("<script language=javascript src='js/mybox.js'></script>");
+
 var name = "ticket";
 var ca = document.cookie.split(';');
 for(var i=0; i<ca.length; i++)
