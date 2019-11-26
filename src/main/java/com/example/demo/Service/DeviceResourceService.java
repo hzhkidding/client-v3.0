@@ -91,6 +91,7 @@ DeviceResourceService {
             device.setStatus(deviceObject.getString("phase"));
             device.setDeviceName(deviceObject.getString("aliasName"));
             device.setKind(deviceObject.getString("kind"));
+            device.setName(deviceObject.getString("name"));
             devicesList.add(device);
         }
         return devicesList;

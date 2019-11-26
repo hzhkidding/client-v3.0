@@ -28,10 +28,10 @@ public class ResourcePriceService {
     RestTemplate restTemplate;
 
 
-    public Double getBaseprice(JSONObject userDevicePrice) {
-        Double cost = userDevicePrice.getDouble("cost");
+    public Double getBaseprice(String name) {
 
-        String basePrice = httpInvoke.postInvoke("", RESOURCES_BASEPRICE_URL + cost.toString() + "/");
+
+        String basePrice = httpInvoke.postInvoke("", RESOURCES_BASEPRICE_URL + name + "/");
 
 
         return Double.valueOf(basePrice);

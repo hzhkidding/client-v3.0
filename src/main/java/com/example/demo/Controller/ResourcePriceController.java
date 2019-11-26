@@ -39,9 +39,10 @@ public class ResourcePriceController extends BaseController{
         System.out.println("设备ID sendCost" + deviceId);
         // userDevicePrice.put("deviceId",this.deviceId);
         //userDevicePrice.put("userId",userId);
-        System.out.println(userDevicePrice.get("cost"));
-        Double basePrice = resourcePriceService.getBaseprice(userDevicePrice);
+        Double basePrice = resourcePriceService.getBaseprice(userDevicePrice.getString("name"));
+/*
         this.basePrice = basePrice;
+*/
         return basePrice;
     }
 

@@ -38,6 +38,7 @@ public class DeviceResourceController extends BaseController{
             device.add(d.getId());
             device.add(d.getStatus());
             device.add(d.getDeviceName());
+            device.add(d.getName());
             System.out.println(d.getDeviceName());
             devices.add(device);
         }
