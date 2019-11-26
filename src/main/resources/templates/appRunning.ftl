@@ -88,10 +88,12 @@
     }
     function getStatus1() {
         var exist = false;
+        var jsonData = {"appInstanceId": "${appInstanceId}"};
         $.ajax({
             url: '/getStatus',
             async: true,
-            type: "get",
+            type: "post",
+            data: JSON.stringify(jsonData),
             contentType: "application/json",
             dataType: "json",
             success: function (result) {

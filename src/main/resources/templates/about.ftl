@@ -110,12 +110,25 @@
             success: function (result) {
                 var r = confirm("竞拍价为" + parseInt(result) + " , 是否接受？");
                 if (r == true) {
-                    window.location.href = "/appInvoke";
-                } else {
+                        var data = { "appInstanceId": "${appInstanceId}"}
+                        //post("/appInvoke",data);
+                        var temp = document.createElement("form");
+                        temp.action = "/appInvoke";
+                        temp.method = "post";
+                        temp.style.display = "none";
+                        for (var x in data) {
+                            var opt = document.createElement("textarea");
+                            opt.name = x;
+                            opt.value = data[x];
+                            temp.appendChild(opt);
+                        }
+                        document.body.appendChild(temp);
+                        temp.submit();
+                    }
+                 else {
                     alert("再见");
                     // window.location.href = "/app";
                 }
-
             }
         })
     }

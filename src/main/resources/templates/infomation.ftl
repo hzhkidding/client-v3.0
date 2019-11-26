@@ -27,26 +27,7 @@
 </head>
 <body>
 <script src="js/socket.js"></script>
-<script>
-    function getInfoDetail(infoId,infoName) {
-        var data = {"infoId": infoId, "infiName": infoName};
-        $.ajax({
-            url: '/getInfoDetail',
-            async: false,
-            // 请求方式
-            type: "post",
-            // contentType
-            contentType: "application/json",
-            // dataType
-            dataType: "json",
-            //data: {'baseprice':36,'demand':'0.5','id': 2,'num': 4},
-            // 把JS的对象或数组序列化一个json 字符串
-            data: JSON.stringify(data),
-            // result 为请求的返回结果对象
-        })
-    }
 
-</script>
 
 <div id="wrapper">
 
@@ -57,14 +38,18 @@
                                                                  onclick="fres();"/></a></div>
 
             <div class="logo"><a href="#">人机物平台</a></div>
+
             <nav id="menu">
+
                 <ul>
                 <#list infoList as info>
-                    <li class="${info.color}"> <img src="${info.imageUrl}" alt=""
-                    title=""/><span>${info.infoName}</span></a></li>
+                    <li class="bluegreen img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc" id="${info.infoId}"> <img  src="${info.imageUrl}" alt=""
+                    title=""/><span>${info.infoName!"资源名暂未获取"}</span></a></li>
                 </#list>
                 </ul>
+
             </nav>
+
             <div class="clear"></div>
 
         </div>
@@ -73,11 +58,19 @@
 </div>
 <script>
     var li = document.getElementsByTagName("li");//这里返回的是多个，getElements很明显复数嘛
-   <#list infoList as info>
+    for(var i=0; i<li.length; i++){
+        li[i].onclick= function(){
+          //  alert("test");
+            alert(this.id)
+           window.location.href = 'getInfoDetail'+e.id;
+         }
+    }
+
+   <#--<#list infoList as info>
    li[${info.infoId}].onclick = function(){
-       getInfoDetail("${info.infoId}","${info.infoName}");
+      window.location.href='/getInfoDetail'+${info.infoId};
    }
-   </#list>
+   </#list>-->
 </script>
 <script type="text/javascript" src="js/jquery.tabify.js"></script>
 <script type="text/javascript" src="js/jquery.swipebox.js"></script>

@@ -67,7 +67,7 @@ public class AppController extends BaseController{
         appDetail.setAppName(appName);
         model.addAttribute("AppDatail",appDetail);
         model.addAttribute("appInstanceId",map.get("appInstanceId"));
-        return "test";
+        return "about";
     }
     @RequestMapping(path = {"/delAppInstance/{appInstanceId}"}, method = RequestMethod.DELETE)
     public String delAppInstance(@PathVariable("appInstanceId") String appInstanceId) {
@@ -75,21 +75,26 @@ public class AppController extends BaseController{
         return "app";
     }
    //应用调用
-    @RequestMapping(path = {"/appInvoke/{appInstanceId}"}, method = RequestMethod.GET)
-    public String appInvoke(Model model,@PathVariable("appInstanceId") String appInstanceId) {
+    @RequestMapping(path = {"/appInvoke"}, method = RequestMethod.POST)
+    public String appInvoke(Model model,@RequestParam("appInstanceId") String appInstanceId) {
         //  String appInstanceId = this.appInstanceId;
         System.out.println(appInstanceId);
         List<Action> actionList = appService.appInvoke(appInstanceId);
         model.addAttribute("AppDetail",appService.appDetail);
         model.addAttribute("ActionList",actionList);
+        model.addAttribute("appInstanceId",appInstanceId);
         return "appRunning";
     }
 
-    @RequestMapping(path = {"/getStatus"}, method = RequestMethod.GET)
+    @RequestMapping(path = {"/getStatus"}, method = RequestMethod.POST)
     @ResponseBody
-    public String getStatus() {
+    public String getStatus(@RequestBody String appInstanceIdJson) {
+        log.info(appInstanceIdJson);
+        JSONObject jsonObject0 = JSONObject.parseObject(appInstanceIdJson);
+        String appInstanceId = jsonObject0.getString("appInstanceId");
         MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
-        map.add("app_instance_id",appService.appInstanceId);
+        map.add("app_instance_id",appInstanceId);
+        log.info(appInstanceId);
         JSONArray jsonArray = JSONArray.parseArray(httpInvoke.postInvoke(map,APP_STATUS_URL));
         if(num != jsonArray.size()) {
             JSONObject jsonObject = jsonArray.getJSONObject(num);
