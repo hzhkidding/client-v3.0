@@ -44,7 +44,7 @@
                 <ul>
                 <#list infoList as info>
                     <li class="bluegreen img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc" id="${info.infoId}"> <img  src="${info.imageUrl}" alt=""
-                    title=""/><span>${info.infoName!"资源名暂未获取"}</span></a></li>
+                    title=""/><div style="font-size:18px">${info.infoName!"资源名暂未获取"}</div></a></li>
                 </#list>
                 </ul>
 

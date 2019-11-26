@@ -71,7 +71,7 @@
                 <ul>
                 <#list AppList as app>
                     <li class="${app.color!"bluegreen"} img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc"> <img src="${app.image!"image/icons/coffe_mechine.png"}" alt=""
-                    title=""/><span>${app.name}</span></a></li>
+                    title=""/><div style="font-size:18px">${app.name}</div></a></li>
                 </#list>
                 </ul>
             </nav>
