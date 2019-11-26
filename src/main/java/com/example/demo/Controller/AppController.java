@@ -58,6 +58,7 @@ public class AppController extends BaseController{
 
         List<String>  deviceNameList= new ArrayList<>();
         AppDetail appDetail;
+
         Map map;
         try {
             map = appService.appInstance(appId, userId, this.X, this.Y);
@@ -66,9 +67,13 @@ public class AppController extends BaseController{
             e.printStackTrace();
             return "noapp";
         }
+
         appDetail.setAppName(appName);
         model.addAttribute("AppDatail",appDetail);
         model.addAttribute("appInstanceId",map.get("appInstanceId"));
+        if(appName.equals("喝星巴克咖啡")){
+            return "starbucks";
+        }
         return "newabout";
     }
     @RequestMapping(path = {"/delAppInstance/{appInstanceId}"}, method = RequestMethod.DELETE)
@@ -78,12 +83,13 @@ public class AppController extends BaseController{
     }
    //应用调用
     @RequestMapping(path = {"/appInvoke"}, method = RequestMethod.POST)
-    public String appInvoke(Model model,@RequestParam("appInstanceId") String appInstanceId) {
+    public String appInvoke(Model model,@RequestParam("appInstanceId") String appInstanceId,@RequestParam("appName") String appName,@RequestParam("appDetailImage") String appDetailImage) {
         //  String appInstanceId = this.appInstanceId;
         System.out.println(appInstanceId);
         List<Action> actionList = appService.appInvoke(appInstanceId);
         idToNum.put(appInstanceId,0);
-        model.addAttribute("AppDetail",appService.appDetail);
+        model.addAttribute("appName",appName);
+        model.addAttribute("appDetailImage",appDetailImage);
         model.addAttribute("ActionList",actionList);
         model.addAttribute("appInstanceId",appInstanceId);
         return "appRunning";
@@ -92,14 +98,12 @@ public class AppController extends BaseController{
     @RequestMapping(path = {"/getStatus"}, method = RequestMethod.POST)
     @ResponseBody
     public String getStatus(@RequestBody String appInstanceIdJson) {
-        log.info(appInstanceIdJson);
         JSONObject jsonObject0 = JSONObject.parseObject(appInstanceIdJson);
         String appInstanceId = jsonObject0.getString("appInstanceId");
         MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
         map.add("app_instance_id",appInstanceId);
         log.info(appInstanceId);
         JSONArray jsonArray = JSONArray.parseArray(httpInvoke.postInvoke(map,APP_STATUS_URL));
-      //
         int newNum = idToNum.get(appInstanceId);
         if(newNum != jsonArray.size()) {
             JSONObject jsonObject = jsonArray.getJSONObject(newNum);

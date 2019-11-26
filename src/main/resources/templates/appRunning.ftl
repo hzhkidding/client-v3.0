@@ -58,8 +58,8 @@
         <div class="sliderbg green">
             <div class="pages_container">
                 <h2 class="page_title">应用执行中</h2>
-                <div class="image_single radius4"><img src="${AppDetail.appDetailImage}" alt="" title="" border="0"/></div>
-                <div class="image_caption blue blue_borderbottom radius4">${AppDetail.appName}</div>
+                <div class="image_single radius4"><img src="${appDetailImage}" alt="" title="" border="0"/></div>
+                <div class="image_caption blue blue_borderbottom radius4">${appName}</div>
 
 
                 <div class="toogle_wrap radius8">
@@ -68,7 +68,7 @@
                     <div class="toggle_container">
                         <ul class="listing_detailed myul">
                             <#list ActionList as action>
-                                <li id="${action.actionId}">${action.actionName}</li>
+                                <li id="${action.actionId}" style="font-size:16px">${action.actionName}</li>
                             </#list>
                         </ul>
                     </div>

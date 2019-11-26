@@ -35,11 +35,7 @@ public class Test {
         deviceResouceInfo.put("资源名称","咖啡机");
         return deviceResouceInfo.toJSONString();
     }
-    @RequestMapping(path = {"/about"},method = RequestMethod.GET)
-    public String deviceResourceDescovery(Model model) {
 
-        return "about";
-    }
     @RequestMapping(path = {"/test"})
     public String test() {
         return "test.ftl";

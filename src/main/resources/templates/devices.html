@@ -174,7 +174,6 @@
 
 
                 $.MsgBox.Confirm("温馨提示", "建议起拍价为 " + result + " ,是否确认", send);
-
                 function send() {
                     var jsonPrice = {"exPrice": result, "deviceId": deviceNo, "status": "Pending"};
                     $.ajax({

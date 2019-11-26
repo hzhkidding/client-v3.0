@@ -34,15 +34,16 @@ public class ResourcePriceController extends BaseController{
     @RequestMapping("/sendCost")
     @ResponseBody
     public Double sendCost(@RequestBody String jsonObject) {
+
         JSONObject userDevicePrice = JSONObject.parseObject(jsonObject);
         this.deviceId = userDevicePrice.getString("deviceId");
         System.out.println("设备ID sendCost" + deviceId);
         // userDevicePrice.put("deviceId",this.deviceId);
         //userDevicePrice.put("userId",userId);
         Double basePrice = resourcePriceService.getBaseprice(userDevicePrice.getString("name"));
-/*
+
         this.basePrice = basePrice;
-*/
+
         return basePrice;
     }
 

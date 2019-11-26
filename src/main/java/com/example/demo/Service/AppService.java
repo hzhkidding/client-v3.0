@@ -105,7 +105,7 @@ public class AppService {
         String appInstanceInfoString = null;
 
         appInstanceInfoString = httpInvoke.postInvoke(map,APP_INSTANCE_URL);
-
+        log.info(appInstanceInfoString);
         JSONObject appInstanceInfo = JSONObject.parseObject(appInstanceInfoString);
         JSONObject jsonObject = appInstanceInfo.getJSONObject("app_instance_resource");
       //  this.appInstanceId = jsonObject.getString("_id");
@@ -121,7 +121,6 @@ public class AppService {
         this.deviceListArray = deviceListArray;
         appDetail.setDeviceNameList(deviceNameList);
         appDetail.setAppDetailImage(appInstanceInfo.getString("process_version"));
-        this.appDetail = appDetail;
         returnMap.put("appDetail",appDetail);
         return returnMap;
     }

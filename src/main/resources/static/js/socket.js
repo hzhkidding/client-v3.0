@@ -21,7 +21,7 @@ if(phoneNumber) {
 
         //实现化WebSocket对象
         //指定要连接的服务器地址与端口建立连接
-        socket = new WebSocket("ws://192.168.31.204:80/ws/server/"+phoneNumber);
+        socket = new WebSocket("ws://120.79.180.118:80/ws/server/"+phoneNumber);
         //连接打开事件
         socket.onopen = function () {
             console.log("Socket 已打开");

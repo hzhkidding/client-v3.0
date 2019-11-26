@@ -9,8 +9,10 @@ import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -55,8 +57,16 @@ public class WebSocketServer {
     @OnClose
     public void onClose(Session session) {
         //删除会话信息
+        Set<Map.Entry<String,Session>> set=phoneToSession.entrySet();
+        for(Map.Entry<String,Session> entry:set) {
+            log.info(entry.getKey() + "-");
+            log.info(String.valueOf(entry.getValue()));
+        }
+        Collection<Session> values = phoneToSession.values();
+        values.remove(session);
         sessions.remove(session);
         //计数-1
+
         int cnt = onlineCount.decrementAndGet();
         //打印日志
         log.info("有连接关闭，当前连接数为：", cnt);
@@ -100,7 +110,7 @@ public class WebSocketServer {
         System.out.println("发送消息"+message);
         try {
             //发送消息
-            session.getBasicRemote().sendText(":::" + message);
+            session.getBasicRemote().sendText(message);
         } catch (IOException e) {
             //打印日志
             log.error("发送消息出错：", e.getMessage());

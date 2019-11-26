@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.demo.Entity.Human;
 import com.example.demo.Service.HumanResourceService;
 import com.example.demo.WebScoket.WebSocketServer;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-
+@Slf4j
 @Controller
 public class HumanResourceController extends BaseController{
 
@@ -52,6 +53,7 @@ public class HumanResourceController extends BaseController{
     public void sendMsqgToHumanByPhone(@RequestBody String jsonObject) throws IOException {
 
         JSONObject msgToHuman = (JSONObject) JSONObject.parse(jsonObject);
+        log.info(msgToHuman.toJSONString());
         webSocketServer.sendMessageToHumanByPhone(msgToHuman.getString("phoneNumber"), msgToHuman.getString("msg"));
 
     }

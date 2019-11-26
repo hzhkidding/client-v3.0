@@ -67,7 +67,7 @@
                     <div class="toggle_container">
                         <ul class="listing_detailed myul">
                             <#list AppDatail.deviceNameList as deviceName>
-                                <li id="mkcoffee">${deviceName!"资源名暂未获取"}</li>
+                                <li id="mkcoffee" style="font-size:16px">${deviceName!"资源名暂未获取"}</li>
                             </#list>
                         </ul>
                     </div>
@@ -149,7 +149,7 @@
 <script>
     function appInvoke() {
 
-        var data = { "appInstanceId": "${appInstanceId}"}
+        var data = { "appInstanceId": "${appInstanceId}","appName":"${AppDatail.appName}","appDetailImage":"${AppDatail.appDetailImage}"}
         //post("/appInvoke",data);
         var temp = document.createElement("form");
         temp.action = "/appInvoke";
