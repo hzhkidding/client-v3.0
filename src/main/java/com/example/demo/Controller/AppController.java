@@ -15,6 +15,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import static com.example.demo.Util.Constans.APP_STATUS_URL;
@@ -22,8 +23,9 @@ import static com.example.demo.Util.Constans.APP_STATUS_URL;
 @Slf4j
 @Controller
 public class AppController extends BaseController{
+    Map<String,Integer> idToNum = new HashMap<>();
 
-    public int num = 0;
+   /* public int num = 0;*/
     @Autowired
     HttpInvoke httpInvoke;
 
@@ -80,6 +82,7 @@ public class AppController extends BaseController{
         //  String appInstanceId = this.appInstanceId;
         System.out.println(appInstanceId);
         List<Action> actionList = appService.appInvoke(appInstanceId);
+        idToNum.put(appInstanceId,0);
         model.addAttribute("AppDetail",appService.appDetail);
         model.addAttribute("ActionList",actionList);
         model.addAttribute("appInstanceId",appInstanceId);
@@ -96,7 +99,23 @@ public class AppController extends BaseController{
         map.add("app_instance_id",appInstanceId);
         log.info(appInstanceId);
         JSONArray jsonArray = JSONArray.parseArray(httpInvoke.postInvoke(map,APP_STATUS_URL));
-        if(num != jsonArray.size()) {
+      //
+        int newNum = idToNum.get(appInstanceId);
+        if(newNum != jsonArray.size()) {
+            JSONObject jsonObject = jsonArray.getJSONObject(newNum);
+            log.info("state=="+jsonObject.getString("state"));
+            if (jsonObject.getString("state").equals("2")) {
+                log.info(jsonArray.toJSONString());
+                log.info(jsonObject.getString("action_name")+jsonObject.getString("state"));
+                idToNum.put(appInstanceId,++newNum);
+                log.info("num=="+newNum);
+                return String.valueOf(newNum);
+            }
+        }
+        if(newNum == jsonArray.size()){
+            return "-1";
+        }
+        /*if(num != jsonArray.size()) {
             JSONObject jsonObject = jsonArray.getJSONObject(num);
             log.info("state=="+jsonObject.getString("state"));
             if (jsonObject.getString("state").equals("2")) {
@@ -109,7 +128,7 @@ public class AppController extends BaseController{
         }
         if(num == jsonArray.size()){
             return "-1";
-        }
+        }*/
         return "0";
     }
 }

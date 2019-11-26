@@ -132,7 +132,7 @@ public class AppService {
      * @return List
      */
     public List appInvoke(String appInstanceId) {
-        appController.num = 0;
+   /*     appController.num = 0;*/
         MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
         map.add("app_instance_id",appInstanceId);
         HttpHeaders headers = new HttpHeaders();
