@@ -148,56 +148,61 @@
         var cost;
         var deviceNo;
         var name;
+        var clickF = false;
         for (var i = 0; i < deviceList.length; i++) {
             if (x >= deviceList[i][0] - MaxRound && x <= deviceList[i][0] + MaxRound && y >= deviceList[i][1] - MaxRound && y <= deviceList[i][1] + MaxRound) {
                 deviceNo = deviceList[i][2];
                 name = deviceList[i][5];
+                clickF = true;
                 break;
             }
         }
         // 需要传输的数据
         var jsonData = {"cost": 0, "deviceId": deviceNo, "name": name, "status": "Pending"};
+        if (clickF) {
+            $.ajax({
+                url: '/sendCost',
+                async: true,
+                // 请求方式
+                type: "post",
+                // contentType
+                contentType: "application/json",
+                // dataType
+                dataType: "json",
+                // 把JS的对象或数组序列化一个json 字符串
+                data: JSON.stringify(jsonData),
+                // result 为请求的返回结果对象
+                success: function (result) {
 
-        $.ajax({
-            url: '/sendCost',
-            async: true,
-            // 请求方式
-            type: "post",
-            // contentType
-            contentType: "application/json",
-            // dataType
-            dataType: "json",
-            // 把JS的对象或数组序列化一个json 字符串
-            data: JSON.stringify(jsonData),
-            // result 为请求的返回结果对象
-            success: function (result) {
+
+                    $.MsgBox.Confirm("温馨提示", "建议起拍价为 " + result + " ,是否确认", send);
+
+                    function send() {
+                        var jsonPrice = {"exPrice": result, "deviceId": deviceNo, "status": "Pending"};
+                        $.ajax({
+                            url: '/sendExPrice',
+                            async: true,
+                            // 请求方式
+                            type: "post",
+                            // contentType
+                            contentType: "application/json",
+                            // dataType
+                            dataType: "json",
+                            // 把JS的对象或数组序列化一个json 字符串
+                            data: JSON.stringify(jsonPrice),
+                            // result 为请求的返回结果对象
+                            success: function (result) {
+                                console.log(result)
+                            }
+                        })
+                    }
 
 
-                $.MsgBox.Confirm("温馨提示", "建议起拍价为 " + result + " ,是否确认", send);
-                function send() {
-                    var jsonPrice = {"exPrice": result, "deviceId": deviceNo, "status": "Pending"};
-                    $.ajax({
-                        url: '/sendExPrice',
-                        async: true,
-                        // 请求方式
-                        type: "post",
-                        // contentType
-                        contentType: "application/json",
-                        // dataType
-                        dataType: "json",
-                        // 把JS的对象或数组序列化一个json 字符串
-                        data: JSON.stringify(jsonPrice),
-                        // result 为请求的返回结果对象
-                        success: function (result) {
-                            console.log(result)
-                        }
-                    })
                 }
+            })
+            setTimeout(window.location.reload(), "1000");
 
-
-
-            }
-        })
+        }
 
         // var temp = document.createElement("form");
         // temp.action = "/sendCost";
@@ -212,8 +217,6 @@
         // document.body.appendChild(temp);
         // temp.submit();
         //发送完成本之后，刷新页面，显示已注册。
-
-        setTimeout(window.location.reload(), "1000");
 
 
     })
