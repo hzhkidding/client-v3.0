@@ -19,23 +19,20 @@
 		<div class="agileinfo-row">
 				
 			<div class="w3layouts-errortext">
-				<h2>4<span>0</span>4</h2>
+				<h2><span></span></h2>
 				
-				<h1>Sorry! The page you were looking for could not be found </h1>
-				<p class="w3lstext">You have been tricked into click on a link that can not be found. Please check the url or go to <a href="#">main page</a> and see if you can locate what you are looking for </p>
-				<div class="agile-search"> 
-					<form action="#" method="post">
+				<h1>${errMsg}</h1>
+				<p class="w3lstext"> <a href="#"></a>  </p>
+				<div class="agile-search">
+					<form action="/getDeviceResource" method="get">
+<#--
 						<input type="text" name="Search" placeholder="Enter your search term..." id="search" required="">
-						<input type="submit" value="Search">
-					</form> 
+-->
+						<input type="submit" value="重试">
+					</form>
 				</div>
 				<div class="w3top-nav-right">	
-					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li><a href="#">About</a></li>  
-						<li><a href="#">Blog</a></li> 
-						<li><a href="#">Contact</a></li>
-					</ul> 
+
 				</div>	
 			</div>	
 		</div>	
@@ -43,7 +40,7 @@
 	<!-- //main -->
 	<!-- copyright -->
 	<div class="copyright w3-agile">
-		<p>© 2017 Elegant Error Page . All rights reserved | Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a></p>
+		<p><a href="http://w3layouts.com/" target="_blank"></a></p>
 	</div>
 	<!-- //copyright --> 
 </body>

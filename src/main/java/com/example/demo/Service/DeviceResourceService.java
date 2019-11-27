@@ -42,15 +42,14 @@ DeviceResourceService {
         //从phoneController获取手机相关信息//json格式数据
 
         Thread.sleep(4000);
-
-        if(phoneInfoController.phoneInfo==null){
+        if(phoneInfoController.getPhoneInfo()==null){
             throw new BusinessException(EmBusinessError.LOCATION_ERROR, "未获取手机位置信息，请确保wifi处于开启状态，并开启位置授权");
         }
         /**
          * 传递wifi信号强度
          */
       //  log.info(phoneInfo);
-        Map map = getLocationInfo(phoneInfoController.phoneInfo);
+        Map map = getLocationInfo(phoneInfoController.getPhoneInfo());
         Object room = map.get("room");
         /*JSONObject labelXY = (JSONObject) JSONObject.parse(httpInvoke.postInvoke(phoneInfo,DEVICE_LABEL_URL));
         Double x = Double.valueOf(labelXY.getString("x"));

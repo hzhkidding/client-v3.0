@@ -50,7 +50,7 @@
                             style=" background-color:${color};border-radius:15px;box-shadow:0px 0px 2px 2px #ccc"
                             id="${info.infoId}"><img src="${info.imageUrl}" alt=""
                                                      title=""/>
-                            <div style="font-size:18px">${info.infoName!"资源名暂未获取"}</div>
+                            <div style="font-size:16px">${info.infoName!"资源名暂未获取"}</div>
                             </a></li>
                         <#assign count=count+1/>
                         <#if count ==11><#assign count=0/></#if>
