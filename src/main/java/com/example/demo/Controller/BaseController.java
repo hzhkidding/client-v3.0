@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -21,11 +22,17 @@ public class BaseController {
 //这种方式处理异常只能返回页面路径，无法返回一个Responsebody形式,所以也要加上一个ResponseBody；
     public Object handlerException(HttpServletRequest request, Exception ex) {
         //判断一下如果Ex不是BussinessException
+
         Map<String, Object> responseData = new HashMap<>();
         if (ex instanceof BusinessException) {
             BusinessException businessException = (BusinessException) ex;
             responseData.put("errCode", businessException.getErrCode());
             responseData.put("errMsg", businessException.getErrMsg());
+            ModelAndView mv = new ModelAndView();
+            //error是静态资源根目录下的error.ftl模版的视图名称
+            mv.setViewName("myerror");
+            mv.addObject("errMsg", businessException.getErrMsg());
+            return mv;
         } else {
             responseData.put("errCode", EmBusinessError.UNKNOW_ERROR.getErrCode());
             responseData.put("errMsg", EmBusinessError.UNKNOW_ERROR.getErrMsg());
