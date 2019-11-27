@@ -30,13 +30,13 @@
         }
 
         .mBlueGreen {
-            max-width: 5.5rem; /*具体数值自行修改，下一行相同*/
-            max-height: 3rem;
+            max-width: 80px; /*具体数值自行修改，下一行相同*/
+            max-height: 40px;
 
             background-color: #06a78b;
             /*background-color:#E8E8E8;*/
             overflow: hidden;
-            margin: 10px;
+            margin: 10px
             display: inline-block;
 
         }
@@ -76,7 +76,7 @@
             margin: 0px 0 20px 0;
             float: left;
         }
-        /*body{width:100%} ul{width:100%} li{margin:0 10%;}*/
+
 
     </style>
 
@@ -126,12 +126,12 @@
                             <#assign count=count+1/>
                             <#if count==7><#break ></#if>
                         </#list>
-<#--                        <li class="mYellow img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc" onclick="more()"><img src="images/icons/apos.jpg" alt=""-->
-<#--                                                                  title="" height="36" width="36"/><div>更多</div></a>-->
-<#--                        </li>-->
-<#--                        <li class="mBlue img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc" onclick="reg()"><img src="images/icons/appMarket.png" alt=""-->
-<#--                                                               title="" height="36" width="36"/><div >注册</div></a>-->
-<#--                        </li>-->
+                        <li class="mYellow img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc" onclick="more()"><img src="images/icons/apos.jpg" alt=""
+                                                                  title="" height="36" width="36"/><div>更多</div></a>
+                        </li>
+                        <li class="mBlue img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc" onclick="reg()"><img src="images/icons/appMarket.png" alt=""
+                                                               title="" height="36" width="36"/><div >注册</div></a>
+                        </li>
                     </ul>
                 </nav>
 
