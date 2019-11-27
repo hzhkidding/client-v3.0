@@ -11,7 +11,7 @@
     <meta name="description" content="GoMobile - A next generation web app theme"/>
     <meta name="keywords"
           content="mobile web app, mobile template, mobile design, mobile app design, mobile app theme, mobile wordpress theme, my mobile app"/>
-    <title>GoMobile - A next generation web app theme</title>
+    <title>人机物融合云计算平台</title>
     <link type="text/css" rel="stylesheet" href="css/style.css"/>
     <link type="text/css" rel="stylesheet" href="colors/metro/metro.css"/>
     <link type="text/css" rel="stylesheet" href="css/swipebox.css"/>
@@ -120,17 +120,17 @@
                         <#list HumanList as human>
                         <#--                            <#assign imgsrc="images/icons/"+"clients"+".png"/>-->
                             <#assign imgsrc="images/icons/"+"a"+count+".jpg"/>
-                            <li class="mBlueGreen img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc"><img src=${imgsrc} alt="" title="" height="40"
-                                                        width="40"/><div>${human.phoneNumber}</div></a>
+                            <li class="mBlueGreen img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc"><img src=${imgsrc} alt="" title="" height="36"
+                                                        width="36"/><div>${human.phoneNumber}</div></a>
                             </li>
                             <#assign count=count+1/>
                             <#if count==7><#break ></#if>
                         </#list>
                         <li class="mYellow img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc" onclick="more()"><img src="images/icons/apos.jpg" alt=""
-                                                                  title="" height="40" width="40"/><div>更多</div></a>
+                                                                  title="" height="36" width="36"/><div>更多</div></a>
                         </li>
                         <li class="mBlue img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc" onclick="reg()"><img src="images/icons/appMarket.png" alt=""
-                                                               title="" height="40" width="40"/><div >注册</div></a>
+                                                               title="" height="36" width="36"/><div >注册</div></a>
                         </li>
                     </ul>
                 </nav>

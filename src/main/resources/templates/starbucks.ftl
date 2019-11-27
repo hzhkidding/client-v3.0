@@ -13,7 +13,7 @@
     <meta name="description" content="GoMobile - A next generation web app theme"/>
     <meta name="keywords"
           content="mobile web app, mobile template, mobile design, mobile app design, mobile app theme, mobile wordpress theme, my mobile app"/>
-    <title>GoMobile - A next generation web app theme</title>
+    <title>人机物融合云计算平台</title>
     <link type="text/css" rel="stylesheet" href="css/style.css"/>
     <link type="text/css" rel="stylesheet" href="colors/metro/metro.css"/>
     <link type="text/css" rel="stylesheet" href="css/swipebox.css"/>
