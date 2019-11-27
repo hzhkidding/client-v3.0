@@ -37,15 +37,24 @@
             <div class="gomenu radius20"><a id="homebutton"><img src="images/icons/home.png" alt="" title=""
                                                                  onclick="fres();"/></a></div>
 
-            <div class="logo"><a href="#">人机物平台</a></div>
+            <div class="logo"><a href="#">信息资源</a>  </div>
 
             <nav id="menu">
 
                 <ul>
-                <#list infoList as info>
-                    <li class="bluegreen img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc" id="${info.infoId}"> <img  src="${info.imageUrl}" alt=""
-                    title=""/><div style="font-size:18px">${info.infoName!"资源名暂未获取"}</div></a></li>
-                </#list>
+                    <#assign colos=['#06a78b','#85af5d','#29aae3','#035792','#c53238','#8b2767','#f87c68','#f17225','#ffb606','#759a51','#8e262c','#671a4b']/>
+                    <#assign count=0/>
+                    <#list infoList as info>
+                        <#assign color=colos[count]/>
+                        <li class="img-rounded img-responsive center-block"
+                            style=" background-color:${color};border-radius:15px;box-shadow:0px 0px 2px 2px #ccc"
+                            id="${info.infoId}"><img src="${info.imageUrl}" alt=""
+                                                     title=""/>
+                            <div style="font-size:18px">${info.infoName!"资源名暂未获取"}</div>
+                            </a></li>
+                        <#assign count=count+1/>
+                        <#if count ==11><#assign count=0/></#if>
+                    </#list>
                 </ul>
 
             </nav>
@@ -57,20 +66,20 @@
     </div>
 </div>
 <script>
-    var li = document.getElementsByTagName("li");//这里返回的是多个，getElements很明显复数嘛
-    for(var i=0; i<li.length; i++){
-        li[i].onclick= function(){
-          //  alert("test");
-            alert(this.id)
-           window.location.href = 'getInfoDetail'+e.id;
-         }
-    }
+    // var li = document.getElementsByTagName("li");//这里返回的是多个，getElements很明显复数嘛
+    // for (var i = 0; i < li.length; i++) {
+    //     li[i].onclick = function () {
+    //         //  alert("test");
+    //         alert(this.id)
+    //         window.location.href = 'getInfoDetail' + e.id;
+    //     }
+    // }
 
-   <#--<#list infoList as info>
-   li[${info.infoId}].onclick = function(){
-      window.location.href='/getInfoDetail'+${info.infoId};
-   }
-   </#list>-->
+    <#--<#list infoList as info>
+    li[${info.infoId}].onclick = function(){
+       window.location.href='/getInfoDetail'+${info.infoId};
+    }
+    </#list>-->
 </script>
 <script type="text/javascript" src="js/jquery.tabify.js"></script>
 <script type="text/javascript" src="js/jquery.swipebox.js"></script>
