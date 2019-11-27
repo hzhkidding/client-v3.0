@@ -41,22 +41,7 @@
 
         }
 
-        .mBlue {
-            background-color: #29aae3;
-            max-width: 80px; /*具体数值自行修改，下一行相同*/
-            max-height: 40px;
-            overflow: hidden;
-            margin: 10px
-        }
 
-        .mYellow {
-            background-color: #00B2EE;
-            max-width: 7rem; /*具体数值自行修改，下一行相同*/
-            max-width: 80px; /*具体数值自行修改，下一行相同*/
-            max-height: 40px;
-            overflow: hidden;
-            margin: 10px
-        }
 
 
         .navPurple {
@@ -69,13 +54,6 @@
             opacity: 0.5;
         }
 
-        #menu1 {
-            width: 25%;
-            height: 25%;
-            padding: 0;
-            margin: 0px 0 20px 0;
-            float: left;
-        }
 
 
     </style>
@@ -120,18 +98,19 @@
                         <#list HumanList as human>
                         <#--                            <#assign imgsrc="images/icons/"+"clients"+".png"/>-->
                             <#assign imgsrc="images/icons/"+"a"+count+".jpg"/>
-                            <li class="mBlueGreen img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc"><img src=${imgsrc} alt="" title="" height="40"
-                                                        width="40"/><div>${human.phoneNumber}</div></a>
+
+                            <li class="mBlueGreen img-rounded img-responsive center-block"
+                                style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc"><img src=${imgsrc} alt=""
+                                                                                                title="" height="40"
+                                                                                                width="40"/>
+                                <div>${human.phoneNumber}</div>
+                                </a>
                             </li>
                             <#assign count=count+1/>
-                            <#if count==7><#break ></#if>
+                            <#if count=6 > <#assign count=1></#if>
+
                         </#list>
-                        <li class="mYellow img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc" onclick="more()"><img src="images/icons/apos.jpg" alt=""
-                                                                  title="" height="40" width="40"/><div>更多</div></a>
-                        </li>
-                        <li class="mBlue img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc" onclick="reg()"><img src="images/icons/appMarket.png" alt=""
-                                                               title="" height="40" width="40"/><div >注册</div></a>
-                        </li>
+
                     </ul>
                 </nav>
 

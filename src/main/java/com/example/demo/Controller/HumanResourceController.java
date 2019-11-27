@@ -47,6 +47,14 @@ public class HumanResourceController extends BaseController{
         return "human";
     }
 
+    @RequestMapping(path = {"/HumanMore"}, method = RequestMethod.GET)
+    public String getMore(Model model, HttpServletResponse response) {
+
+        List<Human> humanList = humanResourceService.getHumanResource();
+        model.addAttribute("HumanList", humanList);
+        return "humanMore";
+    }
+
     //根据用户手机号给人力资源发送消息
     @RequestMapping(path = {"/msg"}, method = RequestMethod.POST)
     @ResponseBody

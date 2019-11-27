@@ -91,7 +91,7 @@
     }
 
     function more() {
-        window.location.href = "/register";
+        window.location.href = "/HumanMore";
 
     }
 
