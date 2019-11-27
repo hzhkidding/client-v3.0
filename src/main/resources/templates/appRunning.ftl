@@ -39,6 +39,7 @@
     </style>
     <script>
 
+
         function fres() {
             window.location.href = "/collect";
 

@@ -31,6 +31,11 @@ public class BaseController {
             ModelAndView mv = new ModelAndView();
             //error是静态资源根目录下的error.ftl模版的视图名称
             mv.setViewName("myerror");
+            if(businessException.getErrCode()==10003){
+                mv.addObject("actionUrl","getDeviceResource");
+            }else if (businessException.getErrCode()==10004){
+                mv.addObject("actionUrl","getAppList");
+            }
             mv.addObject("errMsg", businessException.getErrMsg());
             return mv;
         } else {

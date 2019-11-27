@@ -10,13 +10,7 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-
-
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-
-
 @Component
 public class HttpInvoke {
 
@@ -78,10 +72,6 @@ public class HttpInvoke {
 
         newRestTemplate.setRequestFactory(new RestTemplateConfig.HttpComponentsClientRestfulHttpRequestFactory());
 
-       /* HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-*/
         HttpEntity<String> httpEntity = new HttpEntity<>(json, headers);
         ResponseEntity<String> responseEntity = newRestTemplate.exchange(url, HttpMethod.GET, httpEntity, String.class);
         String deviceResourceInfo = responseEntity.getBody();

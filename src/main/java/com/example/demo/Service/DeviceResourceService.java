@@ -41,7 +41,7 @@ DeviceResourceService {
     public List<Device> getDeviceResource() throws InterruptedException, BusinessException {
         //从phoneController获取手机相关信息//json格式数据
 
-        Thread.sleep(4000);
+        Thread.sleep(5000);
         if(phoneInfoController.getPhoneInfo()==null){
             throw new BusinessException(EmBusinessError.LOCATION_ERROR, "未获取手机位置信息，请确保wifi处于开启状态，并开启位置授权");
         }

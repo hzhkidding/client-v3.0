@@ -24,7 +24,7 @@
 				<h1>${errMsg}</h1>
 				<p class="w3lstext"> <a href="#"></a>  </p>
 				<div class="agile-search">
-					<form action="/getDeviceResource" method="get">
+					<form action="/${actionUrl}" method="get">
 <#--
 						<input type="text" name="Search" placeholder="Enter your search term..." id="search" required="">
 -->

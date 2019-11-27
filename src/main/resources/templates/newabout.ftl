@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="">
 <head>
 
 
@@ -42,6 +42,49 @@
         }
     </style>
     <script>
+        var flag = 0;
+        function appInvoke() {
+            flag = 1;
+            var data = { "appInstanceId": "${appInstanceId}","appName":"${AppDatail.appName}","appDetailImage":"${AppDatail.appDetailImage}"}
+            //post("/appInvoke",data);
+            var temp = document.createElement("form");
+            temp.action = "/appInvoke";
+            temp.method = "post";
+            temp.style.display = "none";
+            for (var x in data) {
+                var opt = document.createElement("textarea");
+                opt.name = x;
+                opt.value = data[x];
+                temp.appendChild(opt);
+            }
+            document.body.appendChild(temp);
+            temp.submit();
+        }
+
+       function delInstance(){
+            var jsonData2 = {"appInstanceId": "${appInstanceId}"};
+            if(flag == 0) {
+                $.ajax({
+                    url: '/delAppInstance',
+                    async: true,
+                    // 请求方式
+                    type: "post",
+                    // contentType
+                    contentType: "application/json",
+                    // dataType
+                    dataType: "json",
+                    //data: {'baseprice':36,'demand':'0.5','id': 2,'num': 4},
+                    data: JSON.stringify(jsonData2),
+                    /*success: function (result) {
+                        alert("退出应用");
+                        window.location.href = "/getAppList";
+                    }*/
+                })
+            }
+           window.location.href = "/getAppList";
+           console.log("test2")
+        }
+
         function fres() {
             window.location.href = "/collect";
 
@@ -49,7 +92,7 @@
     </script>
 
 </head>
-<body>
+<body ><#--onbeforeunload="checkLeave()"-->
 <div id="wrapper">
 
     <div id="content">
@@ -80,6 +123,7 @@
 
 
                 <a class="button_11 bluegreen bluegreen_borderbottom radius4" onclick="sendNeed()">确定</a>
+                <a class="button_11 orange bluegreen_borderbottom radius4" onclick="delInstance()">退出应用</a>
 
                 <div class="clearfix"></div>
                 <!--                <div class="scrolltop radius20"><a onClick="jQuery('html, body').animate( { scrollTop: 0 }, 'slow' );"  href="javascript:void(0);">-->
@@ -130,13 +174,7 @@
         })
 
     }
-
-
-
-
 </script>
-
-
 <script type='text/javascript'>
     $(function () {
 
@@ -147,24 +185,9 @@
     })
 </script>
 <script>
-    function appInvoke() {
 
-        var data = { "appInstanceId": "${appInstanceId}","appName":"${AppDatail.appName}","appDetailImage":"${AppDatail.appDetailImage}"}
-        //post("/appInvoke",data);
-        var temp = document.createElement("form");
-        temp.action = "/appInvoke";
-        temp.method = "post";
-        temp.style.display = "none";
-        for (var x in data) {
-            var opt = document.createElement("textarea");
-            opt.name = x;
-            opt.value = data[x];
-            temp.appendChild(opt);
-        }
-        document.body.appendChild(temp);
-        temp.submit();
-    }
 
 </script>
+
 
 </html>

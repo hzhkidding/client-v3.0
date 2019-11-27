@@ -64,7 +64,11 @@ public class AppService {
             app.setName(appProperties.getString("name"));
             app.setProcess_author(appProperties.getString("v"));
             app.setProcess_id(appProperties.getString("process_id"));
-            app.setImage(appProperties.getString("type"));
+            if(appProperties.getString("type").equals("")){
+                app.setImage("images/icons/appMarket.png");
+            }else {
+                app.setImage(appProperties.getString("type"));
+            }
             app.setColor(appProperties.getString("color"));
             appList.add(app);
         }
@@ -158,13 +162,10 @@ public class AppService {
         }
         return actionList;
     }
-    public void delAppInstance(String appInstanceId) {
+    public String delAppInstance(String appInstanceId) {
         MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
-        map.add("app_instance_id",this.appInstanceId);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
-       httpInvoke.postInvoke(map,APP_DEL_INSTANCE_URL);
+        map.add("app_instance_id",appInstanceId);
+        return httpInvoke.postInvoke(map,APP_DEL_INSTANCE_URL);
 
     }
 }

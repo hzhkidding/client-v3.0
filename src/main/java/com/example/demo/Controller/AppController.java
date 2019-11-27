@@ -7,6 +7,8 @@ import com.example.demo.Entity.App;
 import com.example.demo.Entity.AppDetail;
 import com.example.demo.Service.AppService;
 import com.example.demo.Util.HttpInvoke;
+import com.example.demo.error.BusinessException;
+import com.example.demo.error.EmBusinessError;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,7 @@ import static com.example.demo.Util.Constans.APP_STATUS_URL;
 @Controller
 public class AppController extends BaseController{
     Map<String,Integer> idToNum = new HashMap<>();
+    Map<String,Map<Integer,String>> globalStateMap = new HashMap<>();
 
    /* public int num = 0;*/
     @Autowired
@@ -54,6 +57,7 @@ public class AppController extends BaseController{
 
     //进入应用详情页
     @RequestMapping(path = {"/appInstance"}, method = RequestMethod.POST)
+
     public String appInstance(Model model,@RequestParam("appId") String appId, @RequestParam("userId") String userId,@RequestParam("appName") String appName) {
 
         List<String>  deviceNameList= new ArrayList<>();
@@ -76,18 +80,30 @@ public class AppController extends BaseController{
         }
         return "newabout";
     }
-    @RequestMapping(path = {"/delAppInstance/{appInstanceId}"}, method = RequestMethod.DELETE)
-    public String delAppInstance(@PathVariable("appInstanceId") String appInstanceId) {
-        appService.delAppInstance(appInstanceId);
-        return "app";
+    @RequestMapping(path = {"/delAppInstance"}, method = RequestMethod.POST)
+    @ResponseBody
+    public String delAppInstance(@RequestBody String appInstanceId) {
+        JSONObject jsonObject = JSONObject.parseObject(appInstanceId);
+        log.info("删除实例"+jsonObject.getString("appInstanceId"));
+        return appService.delAppInstance(jsonObject.getString("appInstanceId"));
+
     }
    //应用调用
     @RequestMapping(path = {"/appInvoke"}, method = RequestMethod.POST)
-    public String appInvoke(Model model,@RequestParam("appInstanceId") String appInstanceId,@RequestParam("appName") String appName,@RequestParam("appDetailImage") String appDetailImage) {
+    public String appInvoke(Model model,@RequestParam("appInstanceId") String appInstanceId,@RequestParam("appName") String appName,@RequestParam("appDetailImage") String appDetailImage) throws BusinessException {
         //  String appInstanceId = this.appInstanceId;
         System.out.println(appInstanceId);
-        List<Action> actionList = appService.appInvoke(appInstanceId);
+        List<Action> actionList = null;
+        try {
+            actionList = appService.appInvoke(appInstanceId);
+
+        } catch (Exception e) {
+            throw new BusinessException(EmBusinessError.APP_INVOKE_ERROR, "当前状态不稳定，请刷新重试");
+
+        }
         idToNum.put(appInstanceId,0);
+        Map map  = new HashMap<Integer,String>();
+        globalStateMap.put(appInstanceId,map);
         model.addAttribute("appName",appName);
         model.addAttribute("appDetailImage",appDetailImage);
         model.addAttribute("ActionList",actionList);
@@ -95,9 +111,9 @@ public class AppController extends BaseController{
         return "appRunning";
     }
 
-    @RequestMapping(path = {"/getStatus"}, method = RequestMethod.POST)
+    @RequestMapping(path = {"/getStatus2"}, method = RequestMethod.POST)
     @ResponseBody
-    public String getStatus(@RequestBody String appInstanceIdJson) {
+    public String getStatus2(@RequestBody String appInstanceIdJson) {
         JSONObject jsonObject0 = JSONObject.parseObject(appInstanceIdJson);
         String appInstanceId = jsonObject0.getString("appInstanceId");
         MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
@@ -105,6 +121,8 @@ public class AppController extends BaseController{
         log.info(appInstanceId);
         JSONArray jsonArray = JSONArray.parseArray(httpInvoke.postInvoke(map,APP_STATUS_URL));
         int newNum = idToNum.get(appInstanceId);
+        int sizeNum = jsonArray.size();
+
         if(newNum != jsonArray.size()) {
             JSONObject jsonObject = jsonArray.getJSONObject(newNum);
             log.info("state=="+jsonObject.getString("state"));
@@ -133,6 +151,34 @@ public class AppController extends BaseController{
         if(num == jsonArray.size()){
             return "-1";
         }*/
+        return "0";
+    }
+    @RequestMapping(path = {"/getStatus"}, method = RequestMethod.POST)
+    @ResponseBody
+    public String getStatus(@RequestBody String appInstanceIdJson) {
+        JSONObject jsonObject0 = JSONObject.parseObject(appInstanceIdJson);
+        String appInstanceId = jsonObject0.getString("appInstanceId");
+        MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
+        map.add("app_instance_id",appInstanceId);
+        JSONArray jsonArray = JSONArray.parseArray(httpInvoke.postInvoke(map,APP_STATUS_URL));
+        int newNum = idToNum.get(appInstanceId);
+        Map  stateMap= globalStateMap.get(appInstanceId);
+        for(int i =0;i<jsonArray.size();i++){
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            if(jsonObject.getString("state").equals("2")){
+                System.out.println("输出"+i+stateMap.containsKey(i));
+                if(stateMap.containsKey(i)!=true){
+                    stateMap.put(i,jsonObject.getString("state"));
+                    newNum++;
+                    log.info(jsonObject.getString("action_name")+jsonObject.getString("state"));
+                    log.info(String.valueOf(newNum));
+                    return String.valueOf(i+1);
+                }
+            }
+        }
+        if(newNum == jsonArray.size()){
+            return "-1";
+        }
         return "0";
     }
 }
