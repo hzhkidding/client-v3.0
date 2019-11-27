@@ -1,6 +1,7 @@
 package com.example.demo.Controller;
 import com.example.demo.Entity.Device;
 import com.example.demo.Service.DeviceResourceService;
+import com.example.demo.error.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ public class DeviceResourceController extends BaseController{
 
     //获取设备资源
     @RequestMapping(path = {"/getDeviceResource"}, method = RequestMethod.GET)
-    public String getDeviceResource(Model model) throws InterruptedException {
+    public String getDeviceResource(Model model) throws BusinessException, InterruptedException {
 
         List<Device> deviceList = deviceResourceService.getDeviceResource();
         List<List<Double>> devices = new ArrayList<>();

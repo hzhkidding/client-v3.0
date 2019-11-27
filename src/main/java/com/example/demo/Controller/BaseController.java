@@ -1,6 +1,9 @@
 //定义ExceptionHandler解决未被controller层吸收的exception
 package com.example.demo.Controller;
 
+import com.example.demo.error.BusinessException;
+import com.example.demo.error.EmBusinessError;
+import com.example.demo.response.CommonReturnType;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,9 +21,19 @@ public class BaseController {
 //这种方式处理异常只能返回页面路径，无法返回一个Responsebody形式,所以也要加上一个ResponseBody；
     public Object handlerException(HttpServletRequest request, Exception ex) {
         //判断一下如果Ex不是BussinessException
-        ex.printStackTrace();
         Map<String, Object> responseData = new HashMap<>();
+        if (ex instanceof BusinessException) {
+            BusinessException businessException = (BusinessException) ex;
+            responseData.put("errCode", businessException.getErrCode());
+            responseData.put("errMsg", businessException.getErrMsg());
+        } else {
+            responseData.put("errCode", EmBusinessError.UNKNOW_ERROR.getErrCode());
+            responseData.put("errMsg", EmBusinessError.UNKNOW_ERROR.getErrMsg());
+        }
+        ex.printStackTrace();
+        return CommonReturnType.create(responseData, "fail");
+       /* Map<String, Object> responseData = new HashMap<>();
         responseData.put("errMsg", "当前网络状态不稳定，请刷新页面重试");
-        return  "当前网络状态不稳定，请刷新页面重试";
+        return  "当前网络状态不稳定，请刷新页面重试";*/
     }
 }

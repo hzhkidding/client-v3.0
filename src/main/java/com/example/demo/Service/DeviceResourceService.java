@@ -7,6 +7,8 @@ import com.example.demo.Controller.AppController;
 import com.example.demo.PhoneInfoController.PhoneInfoController;
 import com.example.demo.Entity.Device;
 import com.example.demo.Util.HttpInvoke;
+import com.example.demo.error.BusinessException;
+import com.example.demo.error.EmBusinessError;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -14,9 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static com.example.demo.Util.Constans.*;
 
@@ -24,14 +24,11 @@ import static com.example.demo.Util.Constans.*;
 @Service
 public class
 DeviceResourceService {
-    String room = "";
     public String testJson = "{\n" +
             " \"labelSelector\": [\n" +
             "  { \"key\": \"io.fusionapp/kind\", \"op\": \"Eq\", \"value\": \"smarthome\" } \n" +
             " ]\n" +
             "}";
-
-
     @Autowired
     AppController appController;
 
@@ -41,19 +38,21 @@ DeviceResourceService {
     @Autowired
     HttpInvoke httpInvoke;
 
-    public List<Device> getDeviceResource() throws InterruptedException {
+    public List<Device> getDeviceResource() throws InterruptedException, BusinessException {
         //从phoneController获取手机相关信息//json格式数据
 
-        Thread.sleep(5000);
+        Thread.sleep(4000);
 
-        String phoneInfo = phoneInfoController.phoneInfo;
-
+        if(phoneInfoController.phoneInfo==null){
+            throw new BusinessException(EmBusinessError.LOCATION_ERROR, "未获取手机位置信息，请确保wifi处于开启状态，并开启位置授权");
+        }
         /**
          * 传递wifi信号强度
          */
       //  log.info(phoneInfo);
-
-        JSONObject labelXY = (JSONObject) JSONObject.parse(httpInvoke.postInvoke(phoneInfo,DEVICE_LABEL_URL));
+        Map map = getLocationInfo(phoneInfoController.phoneInfo);
+        Object room = map.get("room");
+        /*JSONObject labelXY = (JSONObject) JSONObject.parse(httpInvoke.postInvoke(phoneInfo,DEVICE_LABEL_URL));
         Double x = Double.valueOf(labelXY.getString("x"));
         Double y = Double.valueOf(labelXY.getString("y"));
         String room = labelXY.getString("room");
@@ -61,7 +60,7 @@ DeviceResourceService {
         appController.X =  x;
         appController.Y = y;
       //  log.info("获取"+labelXY);
-        String id = labelXY.getString("id");
+        String id = labelXY.getString("id");*/
         JSONObject selectorJson = new JSONObject();
         JSONArray labelSelector = new JSONArray();
         JSONObject json = new JSONObject();
@@ -71,7 +70,6 @@ DeviceResourceService {
             room = "110";
         }
         json.put("value", room);
-
         labelSelector.add(json);
         selectorJson.put("labelSelector", labelSelector);
         String deviceResourceInfo = httpInvoke.exchange(selectorJson.toJSONString(), DEVICE_RESOURCE_URL);
@@ -110,8 +108,22 @@ DeviceResourceService {
         deviceId.put("kind", jsonObject.getString("kind"));
         deviceId.put("name", jsonObject.getString("name"));
         return deviceId.toJSONString();
-
-
+    }
+    public <K,V>  Map getLocationInfo(String phoneInfo){
+        Map map = new HashMap<K, V>();
+        JSONObject labelLocation = (JSONObject) JSONObject.parse(httpInvoke.postInvoke(phoneInfo,DEVICE_LABEL_URL));
+        Double x = Double.valueOf(labelLocation.getString("x"));
+        Double y = Double.valueOf(labelLocation.getString("y"));
+/*
+        Double z = Double.valueOf(labelLocation.getString("z"));
+*/
+        String room = labelLocation.getString("room");
+        log.info("x轴:"+x+"y轴"+y);
+        String id = labelLocation.getString("id");
+        map.put("room",room);
+        map.put("3dx",x);
+        map.put("3dy",y);
+        return map;
     }
 
 }
