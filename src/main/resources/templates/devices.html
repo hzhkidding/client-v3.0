@@ -103,6 +103,8 @@
     var l = 20;
     // imgObj.onload
     var MaxRound;
+    var deviceImgW=30;
+    var deviceImgL=35;
     imgObj.onload = function () {
         //图片尺寸自适应，与用户可视区域一致
 
@@ -124,37 +126,74 @@
         colorList[0] = "gray";
         colorList[1] = "orange";
         //绘制设备
+        var devicesSrc = [];
+        var devicesXYList=[];
+
         for (var i = 0; i < deviceList.length; i++) {
             console.log(deviceList[i][0], deviceList[i][1]);
             //横向平面图，坐标转换
-            var xy = XYMap(deviceList[i][0], deviceList[i][1], imgW, imgH);
-            console.log(xy)
-            deviceList[i][0] = xy[0];
-            deviceList[i][1] = xy[1];
+            var devicesXY = XYMap(deviceList[i][0], deviceList[i][1], imgW, imgH);
+            devicesXYList[i]=devicesXY;
+            console.log(devicesXY)
+            deviceList[i][0] = devicesXY[0];
+            deviceList[i][1] = devicesXY[1];
             //渲染颜色
             // ctx.fillStyle = colorList[deviceList[i][3]];
             // 渲染位置
 
             MaxRound = rectLong;
             // ctx.fillRect(deviceList[i][0], deviceList[i][1], rectLong, rectLong);
-            // 设置设备名称
+
+            /* // 设置设备名称
             ctx.beginPath();
             ctx.arc(deviceList[i][0], deviceList[i][1], rectLong, 0, 2 * Math.PI, true);
             ctx.closePath();
             // ctx.stroke();
             ctx.fillStyle = colorList[deviceList[i][3]];
-            ctx.fill();
+            ctx.fill();*/
+
+            //图形设备
+            devicesSrc[i] = deviceList[i][6];
+
+            // ctx.globalCompositeOperation = "source-over"; //全局合成操作
+
             //console.log(deviceList[i][4].length);
-            ctx.fillText(deviceList[i][4], deviceList[i][0] - MaxRound, deviceList[i][1] + MaxRound * 2, deviceList[i][1] + MaxRound);
+            ctx.fillText(deviceList[i][4], deviceList[i][0] , deviceList[i][1]+deviceImgL*1.25, deviceList[i][1] + MaxRound);
             ctx.globalCompositeOperation = "source-over"; //全局合成操作
 
         }
+
+
+        for (var i = 0; i < deviceList.length; i++) {
+
+            // imgDevice.src = devicesSrc[i];
+            // imgDevice.onload = function(){
+            //     drawIMage(imgDevice,xy);
+            // };
+            (function (i) {
+                var imgDevice = new Image();
+                if (deviceList[i][3]==0) {
+                    imgDevice.src = "images/icons/deviceNotReg.jpg";
+                }
+                else{
+                    imgDevice.src = devicesSrc[i];
+
+                }
+                imgDevice.onload = function () {
+
+                    drawIMage(imgDevice, devicesXYList[i]);
+
+                }
+            })(i);
+        }
+
+
         //渲染手机
-        var phone=XYMap(phoneX,phoneY,imgW, imgH);
+        var phone = XYMap(phoneX, phoneY, imgW, imgH);
         var imgphone = new Image();
         imgphone.src = "images/icons/phone3.jpg";
-        imgphone.onload = function(){
-            drawPhone(imgphone,phone);
+        imgphone.onload = function () {
+            drawIMage(imgphone, phone);
         };
 
     }
@@ -175,10 +214,10 @@
         var name;
         var clickF = false;
         for (var i = 0; i < deviceList.length; i++) {
-            if (x >= deviceList[i][0] - MaxRound && x <= deviceList[i][0] + MaxRound && y >= deviceList[i][1] - MaxRound && y <= deviceList[i][1] + MaxRound) {
+            if (x >= deviceList[i][0]  && x <= deviceList[i][0] + deviceImgW && y >= deviceList[i][1] && y <= deviceList[i][1] + deviceImgL) {
                 deviceNo = deviceList[i][2];
                 name = deviceList[i][5];
-                if(deviceList[i][3]==0){
+                if (deviceList[i][3] == 0) {
                     clickF = true;
                 }
                 break;
@@ -259,11 +298,11 @@
         return [newX, newY];
     }
 
-    function drawPhone(imgphone,phone){
+    function drawIMage(imge, xy) {
         var canvas = document.getElementById('myCanvas');
         var ctx = canvas.getContext("2d");
 
-        ctx.drawImage(imgphone, phone[0], phone[1],30,35);
+        ctx.drawImage(imge, xy[0], xy[1], deviceImgW, deviceImgL);
     }
 
 

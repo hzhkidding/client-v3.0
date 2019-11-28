@@ -82,7 +82,7 @@ DeviceResourceService {
             device.setDeviceName(deviceObject.getString("aliasName"));
             device.setKind(deviceObject.getString("kind"));
             device.setName(deviceObject.getString("name"));
-            device.setImage(deviceObject.getString("icons"));
+            device.setImage(deviceObject.getString("icon"));
 
             devicesList.add(device);
         }
