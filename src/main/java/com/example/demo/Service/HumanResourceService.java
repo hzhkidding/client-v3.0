@@ -55,6 +55,7 @@ public class HumanResourceService {
         String province = PROVINCES[new Random().nextInt(PROVINCES.length)];
         labels.put("io.fusionapp.crowdsourcing/province", province);
         resourceSpec.put("name", "human" + phoneNumber);
+        resourceSpec.put("aliasName", "众包员工");
         resourceSpec.put("labels", labels);
         humanResourceRegJson.put("resourceSpec", resourceSpec);
         System.out.println(httpInvoke.postInvoke(humanResourceRegJson.toJSONString(), HUMAN_RESOURCE_REG_URL));
