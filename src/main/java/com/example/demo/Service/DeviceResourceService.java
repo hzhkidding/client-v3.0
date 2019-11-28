@@ -48,18 +48,8 @@ DeviceResourceService {
         /**
          * 传递wifi信号强度
          */
-      //  log.info(phoneInfo);
         Map map = getLocationInfo(phoneInfoController.getPhoneInfo());
         Object room = map.get("room");
-        /*JSONObject labelXY = (JSONObject) JSONObject.parse(httpInvoke.postInvoke(phoneInfo,DEVICE_LABEL_URL));
-        Double x = Double.valueOf(labelXY.getString("x"));
-        Double y = Double.valueOf(labelXY.getString("y"));
-        String room = labelXY.getString("room");
-        log.info("x轴:"+x+"y轴"+y);
-        appController.X =  x;
-        appController.Y = y;
-      //  log.info("获取"+labelXY);
-        String id = labelXY.getString("id");*/
         JSONObject selectorJson = new JSONObject();
         JSONArray labelSelector = new JSONArray();
         JSONObject json = new JSONObject();
@@ -118,10 +108,9 @@ DeviceResourceService {
         JSONObject labelLocation = (JSONObject) JSONObject.parse(httpInvoke.postInvoke(phoneInfo,DEVICE_LABEL_URL));
         Double x = Double.valueOf(labelLocation.getString("x"));
         Double y = Double.valueOf(labelLocation.getString("y"));
-/*
-        Double z = Double.valueOf(labelLocation.getString("z"));
-*/
-        String room = labelLocation.getString("room");
+        appController.X = x;
+        appController.Y = y;
+          String room = labelLocation.getString("room");
         log.info("x轴:"+x+"y轴"+y);
         String id = labelLocation.getString("id");
         map.put("room",room);

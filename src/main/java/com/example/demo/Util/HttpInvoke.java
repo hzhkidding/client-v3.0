@@ -19,7 +19,6 @@ public class HttpInvoke {
     RestTemplate restTemplate;
 
     public String postInvoke(String requestInfo, String url) {
-        System.out.println(requestInfo);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> request = new HttpEntity<String>(requestInfo, headers);

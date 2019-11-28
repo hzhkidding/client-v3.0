@@ -37,10 +37,8 @@ public class AppService {
     HttpInvoke httpInvoke;
     @Autowired
     ResourcePriceController resourcePriceController;
-
-
-    public String appInstanceId;
-    public  JSONArray  deviceListArray;
+    public Map instanceIdToDeviceListArray = new HashMap<String,JSONArray>();
+  /*  public  JSONArray  deviceListArray;*/
     @Autowired
     AppController appController;
 
@@ -109,7 +107,7 @@ public class AppService {
         String appInstanceInfoString = null;
 
         appInstanceInfoString = httpInvoke.postInvoke(map,APP_INSTANCE_URL);
-        log.info(appInstanceInfoString);
+        log.info("应用实例信息"+appInstanceInfoString);
         JSONObject appInstanceInfo = JSONObject.parseObject(appInstanceInfoString);
         JSONObject jsonObject = appInstanceInfo.getJSONObject("app_instance_resource");
       //  this.appInstanceId = jsonObject.getString("_id");
@@ -120,9 +118,11 @@ public class AppService {
             deviceListArray.add(entry.getValue());
             JSONObject deviceObj = (JSONObject) entry.getValue();
             aliaName = deviceObj.getString("aliasName");
+            log.info("设备名称"+aliaName);
             deviceNameList.add(aliaName);
         }
-        this.deviceListArray = deviceListArray;
+        instanceIdToDeviceListArray.put(jsonObject.getString("_id"),deviceListArray);
+      //  this.deviceListArray = deviceListArray;
         appDetail.setDeviceNameList(deviceNameList);
         appDetail.setAppDetailImage(appInstanceInfo.getString("process_version"));
         returnMap.put("appDetail",appDetail);
@@ -159,12 +159,14 @@ public class AppService {
         action.setActionName(jsonObject.getString("action_name"));
         action.setActionId(String.valueOf(i+1));
         actionList.add(action);
+
         }
         return actionList;
     }
     public String delAppInstance(String appInstanceId) {
         MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
         map.add("app_instance_id",appInstanceId);
+        instanceIdToDeviceListArray.remove(appInstanceId);
         return httpInvoke.postInvoke(map,APP_DEL_INSTANCE_URL);
 
     }

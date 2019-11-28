@@ -32,12 +32,12 @@ public class AppController extends BaseController{
     @Autowired
     HttpInvoke httpInvoke;
 
-    private String status;
+  /*  private String status;*/
     @Autowired
     AppService appService;
-    public JSONArray deviceListArray;
+  /*  public JSONArray deviceListArray;
 
-    public String appInstanceId;
+    public String appInstanceId;*/
     public Double X;
     public Double Y;
 
@@ -90,7 +90,7 @@ public class AppController extends BaseController{
     @RequestMapping(path = {"/appInvoke"}, method = RequestMethod.POST)
     public String appInvoke(Model model,@RequestParam("appInstanceId") String appInstanceId,@RequestParam("appName") String appName,@RequestParam("appDetailImage") String appDetailImage) throws BusinessException {
         //  String appInstanceId = this.appInstanceId;
-        System.out.println(appInstanceId);
+        log.info("开始调用应用，实例Id",appInstanceId);
         List<Action> actionList = null;
         try {
             actionList = appService.appInvoke(appInstanceId);
@@ -151,12 +151,11 @@ public class AppController extends BaseController{
         for(int i =0;i<jsonArray.size();i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             if(jsonObject.getString("state").equals("2")){
-                System.out.println("输出"+i+stateMap.containsKey(i));
                 if(stateMap.containsKey(i)!=true){
                     stateMap.put(i,jsonObject.getString("state"));
                     newNum++;
-                    log.info(jsonObject.getString("action_name")+jsonObject.getString("state"));
-                    log.info(String.valueOf(newNum));
+                 /*   log.info(jsonObject.getString("action_name")+jsonObject.getString("state"));
+                    log.info(String.valueOf(newNum));*/
                     return String.valueOf(i+1);
                 }
             }

@@ -6,13 +6,14 @@ import com.example.demo.Entity.DevicePrice;
 import com.example.demo.Service.AppService;
 import com.example.demo.Service.ResourcePriceService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Slf4j
 @Controller
 public class ResourcePriceController extends BaseController{
 
@@ -23,14 +24,15 @@ public class ResourcePriceController extends BaseController{
     @Autowired
     ResourcePriceService resourcePriceService;
 
-    @RequestMapping("/registerDevices/{deviceNo}")
+  /*  @RequestMapping("/registerDevices/{deviceNo}")
     public String registerDevices(@PathVariable(name = "deviceNo") String deviceId, @CookieValue("userId") String userId, Model model) {
         //System.out.println(deviceNo);
         //  this.deviceId = deviceId;
         return "devicesRegister";
-    }
+    }*/
 
 
+/*
     @RequestMapping("/sendCost")
     @ResponseBody
     public Double sendCost(@RequestBody String jsonObject) {
@@ -46,6 +48,7 @@ public class ResourcePriceController extends BaseController{
 
         return basePrice;
     }
+*/
 
     @RequestMapping("/sendExPrice")
     @ResponseBody
@@ -74,10 +77,12 @@ public class ResourcePriceController extends BaseController{
     public Double sendNeed(@RequestBody String jsonObject, Model model) {
 
         JSONObject sendNeed = JSONObject.parseObject(jsonObject);
+        String appInstanceId = sendNeed.getString("appInstanceId");
         JSONObject getFinalPrice = new JSONObject();
         getFinalPrice.put("demand", sendNeed.getDouble("demand"));
         getFinalPrice.put("userId", 11);
-        getFinalPrice.put("devices", appService.deviceListArray);
+        getFinalPrice.put("devices", appService.instanceIdToDeviceListArray.get(appInstanceId));
+        log.info("获取价格,实例Id"+appInstanceId+"设备列表"+appService.instanceIdToDeviceListArray.get(appInstanceId));
         return resourcePriceService.getFinalPrice(getFinalPrice);
     }
 }

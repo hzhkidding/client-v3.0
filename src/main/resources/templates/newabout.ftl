@@ -144,7 +144,7 @@
         var Demand = document.getElementById("nd").value;
         console.log(Demand);
 
-        var jsonData = {"baseprice": 36, "demand": Demand, "id": 2, "num": 4};
+        var jsonData = {"baseprice": 36, "demand": Demand, "id": 2, "num": 4,"appInstanceId":"${appInstanceId}"};
 
         $.ajax({
             url: '/sendNeed',
