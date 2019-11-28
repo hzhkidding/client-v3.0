@@ -60,6 +60,10 @@
 
 
     var deviceList = [[${DeviceList}]];
+    var phoneX = [[${phoneX}]];
+    var phoneY = [[${phoneY}]];
+    // console.log(phoneX,phoneY)
+
     // console.log(deviceList[1][3])
     // console.log(tmp);
     // console.log(tmp.length);
@@ -72,6 +76,17 @@
         } else {
             deviceList[i][3] = 1;
         }
+        while (deviceList[i][0] >= 1) {
+            // console.log("xxxx"+deviceList[i][0])
+            deviceList[i][0] *= 0.9;
+            // console.log(deviceList[i][0])
+        }
+        while (deviceList[i][1] >= 1) {
+            deviceList[i][1] *= 0.8;
+            // console.log(deviceList[i][1])
+            // console.log("yyy"+deviceList[i][1])
+
+        }
     }
 
 
@@ -81,7 +96,7 @@
     c7.height = document.documentElement.clientWidth;
     var cW = c7.offsetWidth;    // 获取元素宽度
     var imgObj = new Image();
-    imgObj.src = "images/wenjin.png";
+    imgObj.src = "images/30wenjin.png";
     var imgW = '';
     var imgH = '';
 
@@ -101,8 +116,11 @@
         ctx7.drawImage(this, 0, 0, cW, imgH * cW / imgW)
         var canvas = document.getElementById('myCanvas');
         var ctx = canvas.getContext("2d");
+
+
         //颜色列表，灰色未注册，橙色为已注册
         var colorList = new Array()
+        var rectLong = 20;
         colorList[0] = "gray";
         colorList[1] = "orange";
         //绘制设备
@@ -116,7 +134,7 @@
             //渲染颜色
             // ctx.fillStyle = colorList[deviceList[i][3]];
             // 渲染位置
-            var rectLong = 15;
+
             MaxRound = rectLong;
             // ctx.fillRect(deviceList[i][0], deviceList[i][1], rectLong, rectLong);
             // 设置设备名称
@@ -131,6 +149,13 @@
             ctx.globalCompositeOperation = "source-over"; //全局合成操作
 
         }
+        //渲染手机
+        var phone=XYMap(phoneX,phoneY,imgW, imgH);
+        var imgphone = new Image();
+        imgphone.src = "images/icons/phone3.jpg";
+        imgphone.onload = function(){
+            drawPhone(imgphone,phone);
+        };
 
     }
 
@@ -230,6 +255,13 @@
         newY = OriginY * height;
 
         return [newX, newY];
+    }
+
+    function drawPhone(imgphone,phone){
+        var canvas = document.getElementById('myCanvas');
+        var ctx = canvas.getContext("2d");
+
+        ctx.drawImage(imgphone, phone[0], phone[1],30,35);
     }
 
 

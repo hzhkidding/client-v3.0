@@ -16,7 +16,9 @@
     <link type="text/css" rel="stylesheet" href="colors/metro/metro.css"/>
     <link type="text/css" rel="stylesheet" href="css/swipebox.css"/>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" type="text/css" href="css/style3.css"/>
 
+    <script type="text/javascript" src="js/select/modernizr.custom.79639.js"></script>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
@@ -84,15 +86,15 @@
             pointer-events: none;
         }
 
-        .content {
-            width: 350px;
-            height: 150px;
+        /*.content {*/
+        /*    width: 350px;*/
+        /*    height: 150px;*/
 
-            margin: 0 auto; /*水平居中*/
-            position: relative;
-            top: 100%; /*偏移*/
-            transform: translateY(100%);
-        }
+        /*    margin: 0 auto; !*水平居中*!*/
+        /*    position: relative;*/
+        /*    top: 100%; !*偏移*!*/
+        /*    transform: translateY(100%);*/
+        /*}*/
 
         .button {
             background: #7892c2;
@@ -122,54 +124,149 @@
             text-decoration: none;
         }
 
-        .mydiv{
-            padding-top:100px;
+        .mydiv {
+            padding-top: 100px;
         }
-    </style>
 
+        /*body｛*/
+        /*background-image:url (images/bg-metro.jpg)*/
+        /*background-size:hover*/
+        /*background-image：url（./images/background.jpg）;*/
+        /*｝*/
+    </style>
+    <style>
+
+    </style>
 </head>
 <body>
 <div id="wrapper">
 
     <div id="content">
 
-        <div class="sliderbg_menu">
+        <div class="mysliderbg_menu">
 
-<!--            <div class="logo"><a href="#">人机物平台初始化</a></div>-->
+            <!--            <div class="logo"><a href="#">人机物平台初始化</a></div>-->
 
-            <div align="center" ><img src="images/front.jpg" class="mydiv"/></div>
-            <div class="content">
-                <label id="lblSelect">
-                    <select id="selectPointOfInterest" title="Select points of interest nearby">
-<!--                        <option>请选择平台</option>-->
-<!--                        <option value="/collect">人机物融合云计算平台</option>-->
-                        <option value="/collect">人机物融合云计算平台——文津酒店</option>
-                        <option value="/collect">人机物融合云计算平台——北京大学</option>
-<!--                        <option value="/collect">人机物融合智慧城市平台</option>-->
+            <div align="center"><img src="images/front.jpg" class="mydiv"/></div>
+            <!--            <div class="content">-->
+            <!--                &lt;!&ndash;                <label id="lblSelect">&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    <select id="selectPointOfInterest" title="Select points of interest nearby">&ndash;&gt;-->
+            <!--                &lt;!&ndash;                        &lt;!&ndash;                        <option>请选择平台</option>&ndash;&gt;&ndash;&gt;-->
+            <!--                &lt;!&ndash;                        &lt;!&ndash;                        <option value="/collect">人机物融合云计算平台</option>&ndash;&gt;&ndash;&gt;-->
+            <!--                &lt;!&ndash;                        <option value="/collect">人机物融合云计算平台——文津酒店</option>&ndash;&gt;-->
+            <!--                &lt;!&ndash;                        <option value="/collect">人机物融合云计算平台——北京大学</option>&ndash;&gt;-->
+            <!--                &lt;!&ndash;                        &lt;!&ndash;                        <option value="/collect">人机物融合智慧城市平台</option>&ndash;&gt;&ndash;&gt;-->
 
 
-                    </select>
-                </label>
+            <!--                &lt;!&ndash;                    </select>&ndash;&gt;-->
+            <!--                &lt;!&ndash;                </label>&ndash;&gt;-->
+            <!--                <section class="main">-->
 
-                <button type="button" class="button" style="display:block;margin:0 auto" onclick="collect()">确认</button>
+            <!--                    <div class="wrapper-demo">-->
+            <!--                        <div id="dd" class="wrapper-dropdown-2" tabindex="1">Sign in with-->
+            <!--                            <ul class="dropdown">-->
+            <!--                                <li><a href="#" value="/collect">Twitter</a></li>-->
+            <!--                                <li><a href="#" value="/collect">Github</a></li>-->
+            <!--                                <li><a href="#" value="/collect">Facebook</a>-->
+            <!--                                </li>-->
+            <!--                            </ul>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+
+            <!--                </section>-->
+            <!--&lt;!&ndash;                <button type="button" class="button" style="display:block;margin:0 auto" onclick="collect()">确认</button>&ndash;&gt;-->
+            <!--            </div>-->
+
+            <div class="container">
+
+
+
+                <div style="text-align:center;clear:both">
+                    <script src="/gg_bd_ad_720x90.js" type="text/javascript"></script>
+                    <script src="/follow.js" type="text/javascript"></script>
+                </div>
+                <section class="main">
+                    <div class="wrapper-demo">
+                        <div id="dd" class="wrapper-dropdown-3" tabindex="1">
+                            <span>请选择平台</span>
+                            <ul id="ul" class="dropdown">
+                                <li>人机物融合云计算平台——文津酒店</li>
+                                <li>人机物融合云计算平台——北京大学</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
             </div>
-            <script type="text/javascript">
-                var myselect = document.getElementById("selectPointOfInterest");
-                var index = myselect.selectedIndex;
-                var html = myselect.options[0].value;
-
-                function collect() {
-                    window.setTimeout("window.location=html", 0);
-                }
-            </script>
+            <p></p>
+            <button type="button" class="button" style="display:block;margin:0 auto" onclick="collect()">确认</button>
 
 
         </div>
-
     </div>
 
 </div>
 
+</div>
+<script type="text/javascript">
+    // var myselect = document.getElementById("ul");
+    // console.log(myselect)
+    // var index = myselect.selectedIndex;
+    // var html = myselect.options[0].value;
+
+    function collect() {
+       window.location.href="/collect";
+    }
+</script>
+
+<script type="text/javascript" src="js/select/jquery.js"></script>
+<script type="text/javascript">
+
+    function DropDown(el) {
+        this.dd = el;
+        this.placeholder = this.dd.children('span');
+        this.opts = this.dd.find('ul.dropdown > li');
+        this.val = '';
+        this.index = -1;
+        this.initEvents();
+    }
+    DropDown.prototype = {
+        initEvents : function() {
+            var obj = this;
+
+            obj.dd.on('click', function(event){
+                $(this).toggleClass('active');
+                return false;
+            });
+
+            obj.opts.on('click',function(){
+                var opt = $(this);
+                obj.val = opt.text();
+                obj.index = opt.index();
+                obj.placeholder.text(obj.val);
+            });
+        },
+        getValue : function() {
+            return this.val;
+        },
+        getIndex : function() {
+            return this.index;
+        }
+    }
+
+    $(function() {
+
+        var dd = new DropDown( $('#dd') );
+
+        $(document).click(function() {
+            // all dropdowns
+            $('.wrapper-dropdown-3').removeClass('active');
+        });
+
+    });
+
+</script>
 
 <script type="text/javascript" src="js/jquery.tabify.js"></script>
 <script type="text/javascript" src="js/jquery.swipebox.js"></script>
