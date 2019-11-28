@@ -38,7 +38,7 @@ DeviceResourceService {
     @Autowired
     HttpInvoke httpInvoke;
 
-    public List<Device> getDeviceResource() throws InterruptedException, BusinessException {
+    public <K,V> Map getDeviceResource() throws InterruptedException, BusinessException {
         //从phoneController获取手机相关信息//json格式数据
 
         Thread.sleep(5000);
@@ -77,6 +77,9 @@ DeviceResourceService {
         /**f
          * 设置设备List的属性，返回给controller
          */
+        Map devicePhoneLocation = new HashMap<K,V>();
+        devicePhoneLocation.put("phoneX",map.get("phoneX"));
+        devicePhoneLocation.put("phoneY",map.get("phoneY"));
         for (int i = 0; i < deviceResourceJsonArray.size(); i++) {
             JSONObject deviceObject = deviceResourceJsonArray.getJSONObject(i);
             Device device = new Device();
@@ -91,7 +94,8 @@ DeviceResourceService {
             device.setName(deviceObject.getString("name"));
             devicesList.add(device);
         }
-        return devicesList;
+        devicePhoneLocation.put("devicesList",devicesList);
+        return devicePhoneLocation;
     }
 
     /**
@@ -121,8 +125,8 @@ DeviceResourceService {
         log.info("x轴:"+x+"y轴"+y);
         String id = labelLocation.getString("id");
         map.put("room",room);
-        map.put("3dx",x);
-        map.put("3dy",y);
+        map.put("phoneX",x);
+        map.put("phoneY",y);
         return map;
     }
 

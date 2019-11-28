@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 获取设备资源信息
@@ -25,8 +26,9 @@ public class DeviceResourceController extends BaseController{
     //获取设备资源
     @RequestMapping(path = {"/getDeviceResource"}, method = RequestMethod.GET)
     public String getDeviceResource(Model model) throws BusinessException, InterruptedException {
-
-        List<Device> deviceList = deviceResourceService.getDeviceResource();
+        Map map = deviceResourceService.getDeviceResource();
+       // List<Device> deviceList = deviceResourceService.getDeviceResource();
+       List<Device> deviceList = (List<Device>) map.get("devicesList");
         List<List<Double>> devices = new ArrayList<>();
         for (Device d : deviceList) {
             List device = new ArrayList<>();
@@ -44,6 +46,8 @@ public class DeviceResourceController extends BaseController{
             devices.add(device);
         }
         model.addAttribute("DeviceList", devices);
+        model.addAttribute("phoneX",map.get("phoneX"));
+        model.addAttribute("phoneY",map.get("phoneY"));
         return "devices";
     }
 }
