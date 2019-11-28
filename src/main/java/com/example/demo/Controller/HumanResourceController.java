@@ -27,7 +27,7 @@ public class HumanResourceController extends BaseController{
     //人力资源注册
     @RequestMapping(path = {"/humanResourceReg"}, method = RequestMethod.POST)
     public String reg(@RequestParam("phoneNumber") String phoneNumber, HttpServletResponse response) {
-        humanResourceService.humanResourceReg(phoneNumber);
+       humanResourceService.humanResourceReg(phoneNumber);
         Cookie cookie = new Cookie("ticket", phoneNumber);
         cookie.setMaxAge(3600 * 24 * 5);
         cookie.setPath("/");

@@ -46,7 +46,7 @@ public class HumanResourceService {
     RestTemplate restTemplate;
 
 
-    public void humanResourceReg(String phoneNumber) {
+    public boolean humanResourceReg(String phoneNumber) {
         Human human = new Human();
         human.setPhoneNumber(phoneNumber);
         JSONObject labels = new JSONObject();
@@ -58,7 +58,12 @@ public class HumanResourceService {
         resourceSpec.put("aliasName", "众包员工");
         resourceSpec.put("labels", labels);
         humanResourceRegJson.put("resourceSpec", resourceSpec);
-        System.out.println(httpInvoke.postInvoke(humanResourceRegJson.toJSONString(), HUMAN_RESOURCE_REG_URL));
+        try {
+            httpInvoke.postInvoke(humanResourceRegJson.toJSONString(), HUMAN_RESOURCE_REG_URL);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
 
     }
 
