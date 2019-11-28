@@ -32,7 +32,7 @@ public class ResourcePriceController extends BaseController{
     }*/
 
 
-/*
+
     @RequestMapping("/sendCost")
     @ResponseBody
     public Double sendCost(@RequestBody String jsonObject) {
@@ -48,7 +48,7 @@ public class ResourcePriceController extends BaseController{
 
         return basePrice;
     }
-*/
+
 
     @RequestMapping("/sendExPrice")
     @ResponseBody

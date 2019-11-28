@@ -120,7 +120,7 @@
 
         //颜色列表，灰色未注册，橙色为已注册
         var colorList = new Array()
-        var rectLong = 20;
+        var rectLong = 15;
         colorList[0] = "gray";
         colorList[1] = "orange";
         //绘制设备
@@ -178,7 +178,9 @@
             if (x >= deviceList[i][0] - MaxRound && x <= deviceList[i][0] + MaxRound && y >= deviceList[i][1] - MaxRound && y <= deviceList[i][1] + MaxRound) {
                 deviceNo = deviceList[i][2];
                 name = deviceList[i][5];
-                clickF = true;
+                if(deviceList[i][3]==0){
+                    clickF = true;
+                }
                 break;
             }
         }
