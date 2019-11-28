@@ -8,6 +8,8 @@ import com.example.demo.Entity.Action;
 import com.example.demo.Entity.App;
 import com.example.demo.Entity.AppDetail;
 import com.example.demo.Util.HttpInvoke;
+import com.example.demo.error.BusinessException;
+import com.example.demo.error.EmBusinessError;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -92,7 +94,7 @@ public class AppService {
      * @param Y
      * @return
      */
-    public Map<String,Object> appInstance(String appId,String userId,Double X,Double Y){
+    public Map<String,Object> appInstance(String appId,String userId,Double X,Double Y) throws BusinessException {
 
         Map<String,Object> returnMap = new HashMap();
         JSONArray deviceListArray = new JSONArray();
@@ -110,15 +112,19 @@ public class AppService {
             appInstanceInfoString = httpInvoke.postInvoke(map,APP_INSTANCE_URL);
         } catch (Exception e) {
             e.printStackTrace();
+            map.remove("app_class_id");
             map.add("app_class_id","5dda2e1ad90231244a5ac0ca");
-            map.add("user_id","1");
-            map.add("x",null);
-            map.add("y",null);
             map.add("count","1");
             appInstanceInfoString= httpInvoke.postInvoke(map,APP_INSTANCE_URL);
         }
         log.info("应用实例信息"+appInstanceInfoString);
-        JSONObject appInstanceInfo = JSONObject.parseObject(appInstanceInfoString);
+        JSONObject appInstanceInfo = null;
+        try {
+            appInstanceInfo = JSONObject.parseObject(appInstanceInfoString);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BusinessException(EmBusinessError.APP_INSTANCE_ERROR, "当前应用可用资源被占用，请稍后重试");
+        }
         JSONObject jsonObject = appInstanceInfo.getJSONObject("app_instance_resource");
       //  this.appInstanceId = jsonObject.getString("_id");
         returnMap.put("appInstanceId",jsonObject.getString("_id"));
