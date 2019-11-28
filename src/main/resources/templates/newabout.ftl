@@ -21,6 +21,7 @@
     <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
     <script src="js/jquery.validate.min.js" type="text/javascript"></script>
     <script src="js/mybox.js" type="text/javascript"></script>
+    <script src="js/socket.js"></script>
 
     <title>人机物融合平台</title>
     <style>

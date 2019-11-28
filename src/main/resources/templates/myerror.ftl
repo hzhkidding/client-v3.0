@@ -12,6 +12,8 @@
 <!-- web font -->
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'><!--web font-->
 <!-- //web font -->
+	<script src="js/socket.js"></script>
+
 </head>
 <body>
 	<!-- main -->

@@ -116,27 +116,38 @@
                 <nav id="menu" class="navPurple">
 
                     <ul>
+                        <li class="blue img-rounded img-responsive center-block"
+                            style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc" onclick="reg()"><img
+                                    src="images/icons/appMarket.png" alt="" title=""/>
+                            <div style="font-size: 18px">注册</div>
+                            </a>
+                        </li>
                         <#assign count=1/>
                         <#list HumanList as human>
                         <#--                            <#assign imgsrc="images/icons/"+"clients"+".png"/>-->
                             <#assign imgsrc="images/icons/"+"a"+count+".jpg"/>
-                            <li class="mBlueGreen img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc"><img src=${imgsrc} alt="" title="" height="36"
-                                                        width="36"/><div>${human.phoneNumber}</div></a>
+                        <#--                            <li class="bluegreen img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc"><img src=${imgsrc} alt="" title="" height="36"-->
+                        <#--                                                        width="36"/><div>${human.phoneNumber}</div></a>-->
+                        <#--                            </li>-->
+                            <li class="bluegreen img-rounded img-responsive center-block"
+                                style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc"><img src=${imgsrc} alt=""
+                                                                                                title=""/>
+                                <div style="font-size: 18px">${human.phoneNumber}</div>
+                                </a>
                             </li>
                             <#assign count=count+1/>
-                            <#if count==7><#break ></#if>
+                            <#if count==7><#assign count=1/></#if>
                         </#list>
-                        <li class="mYellow img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc" onclick="more()"><img src="images/icons/apos.jpg" alt=""
-                                                                  title="" height="36" width="36"/><div>更多</div></a>
-                        </li>
-                        <li class="mBlue img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc" onclick="reg()"><img src="images/icons/appMarket.png" alt=""
-                                                               title="" height="36" width="36"/><div >注册</div></a>
-                        </li>
+                        <#--                        <li class="mYellow img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc" onclick="more()"><img src="images/icons/apos.jpg" alt=""-->
+                        <#--                                                                  title="" height="36" width="36"/><div>更多</div></a>-->
+                        <#--                        </li>-->
+                        <#--                        <li class="mBlue img-rounded img-responsive center-block" style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc" onclick="reg()"><img src="images/icons/appMarket.png" alt=""-->
+                        <#--                                                               title="" height="36" width="36"/><div >注册</div></a>-->
+                        <#--                        </li>-->
                     </ul>
                 </nav>
 
             </div>
-            <div class="mylogo"><a href="#">微信资源列表</a></div>
 
 
             <div class="clear"></div>
