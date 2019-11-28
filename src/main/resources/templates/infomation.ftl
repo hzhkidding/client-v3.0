@@ -37,7 +37,7 @@
             <div class="gomenu radius20"><a id="homebutton"><img src="images/icons/home.png" alt="" title=""
                                                                  onclick="fres();"/></a></div>
 
-            <div class="logo"><a href="#">信息资源</a>  </div>
+            <div class="logo"><a href="#">信息资源</a></div>
 
             <nav id="menu">
 
@@ -46,12 +46,20 @@
                     <#assign count=0/>
                     <#list infoList as info>
                         <#assign color=colos[count]/>
+                        <#if info.type=="vm">
+                            <#assign imgSrc="images/icons/blockChain.jpg"/>
+                        <#else>
+                            <#assign imgSrc="images/icons/application.jpg"/>
+
+                        </#if>
+
                         <li class="img-rounded img-responsive center-block"
                             style=" background-color:${color};border-radius:15px;box-shadow:0px 0px 2px 2px #ccc"
-                            id="${info.infoId}"><img src="${info.imageUrl}" alt=""
-                                                     title=""/>
-                            <div style="font-size:16px">${info.infoName!"资源名暂未获取"}</div>
-                            </a></li>
+                            id="${info.infoId}">
+                            <img src=${imgSrc} alt="" title=""/>
+                            <div style="font-size:0.8rem">${info.infoName!"资源名暂未获取"}</div>
+                            </a>
+                        </li>
                         <#assign count=count+1/>
                         <#if count ==11><#assign count=0/></#if>
                     </#list>

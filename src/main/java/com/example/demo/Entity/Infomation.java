@@ -10,6 +10,7 @@ public class Infomation {
     public String infoId;
     public String color;
     public String imageUrl;
+    public String type;
 //    public String api;
 
 }
