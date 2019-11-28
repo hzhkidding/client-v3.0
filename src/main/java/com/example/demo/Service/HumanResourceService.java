@@ -53,6 +53,7 @@ public class HumanResourceService {
         JSONObject resourceSpec = (JSONObject) humanResourceRegJson.get("resourceSpec");
         labels.put("io.fusionapp.crowdsourcing/phone", phoneNumber);
         String province = PROVINCES[new Random().nextInt(PROVINCES.length)];
+        labels.put("io.fusionapp/kind","crowdsourcing");
         labels.put("io.fusionapp.crowdsourcing/province", province);
         resourceSpec.put("name", "human" + phoneNumber);
         resourceSpec.put("aliasName", "众包员工");

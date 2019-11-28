@@ -43,9 +43,8 @@
         }
     </style>
     <script>
-        var flag = 0;
+
         function appInvoke() {
-            flag = 1;
             var data = { "appInstanceId": "${appInstanceId}","appName":"${AppDatail.appName}","appDetailImage":"${AppDatail.appDetailImage}"}
             //post("/appInvoke",data);
             var temp = document.createElement("form");
@@ -64,7 +63,6 @@
 
        function delInstance(){
             var jsonData2 = {"appInstanceId": "${appInstanceId}"};
-            if(flag == 0) {
                 $.ajax({
                     url: '/delAppInstance',
                     async: true,
@@ -81,7 +79,7 @@
                         window.location.href = "/getAppList";
                     }*/
                 })
-            }
+
            window.location.href = "/getAppList";
            console.log("test2")
         }

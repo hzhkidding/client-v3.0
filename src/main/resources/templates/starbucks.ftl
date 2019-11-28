@@ -44,6 +44,29 @@
         }
     </style>
     <script>
+        function delInstance(){
+            var jsonData2 = {"appInstanceId": "${appInstanceId}"};
+
+                $.ajax({
+                    url: '/delAppInstance',
+                    async: true,
+                    // 请求方式
+                    type: "post",
+                    // contentType
+                    contentType: "application/json",
+                    // dataType
+                    dataType: "json",
+                    //data: {'baseprice':36,'demand':'0.5','id': 2,'num': 4},
+                    data: JSON.stringify(jsonData2),
+                    /*success: function (result) {
+                        alert("退出应用");
+                        window.location.href = "/getAppList";
+                    }*/
+                })
+
+            window.location.href = "/getAppList";
+            console.log("test2")
+        }
         function fres() {
             window.location.href = "/collect";
 
@@ -78,6 +101,8 @@
 
 
                 <a class="button_11 bluegreen bluegreen_borderbottom radius4" onclick="sendNeed()">确定</a>
+                <a class="button_11 orange bluegreen_borderbottom radius4" onclick="delInstance()">退出应用</a>
+
 
                 <div class="clearfix"></div>
 

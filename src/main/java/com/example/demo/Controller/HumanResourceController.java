@@ -56,13 +56,12 @@ public class HumanResourceController extends BaseController{
     }
 
     //根据用户手机号给人力资源发送消息
-    @RequestMapping(path = {"/msg"}, method = RequestMethod.POST)
+    @RequestMapping(path = {"/msg"}, method = RequestMethod.GET)
     @ResponseBody
-    public void sendMsqgToHumanByPhone(@RequestBody String jsonObject) throws IOException {
+    public void sendMsqgToHumanByPhone(@RequestParam("num") String num,@RequestParam("msg") String message) throws IOException {
 
-        JSONObject msgToHuman = (JSONObject) JSONObject.parse(jsonObject);
-        log.info(msgToHuman.toJSONString());
-        webSocketServer.sendMessageToHumanByPhone(msgToHuman.getString("phoneNumber"), msgToHuman.getString("msg"));
+       // log.info(msgToHuman.toJSONString());
+        webSocketServer.sendMessageToHumanByPhone(num,message);
 
     }
 

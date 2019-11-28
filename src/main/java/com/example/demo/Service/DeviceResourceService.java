@@ -82,6 +82,8 @@ DeviceResourceService {
             device.setDeviceName(deviceObject.getString("aliasName"));
             device.setKind(deviceObject.getString("kind"));
             device.setName(deviceObject.getString("name"));
+            device.setImage(deviceObject.getString("icons"));
+
             devicesList.add(device);
         }
         devicePhoneLocation.put("devicesList",devicesList);

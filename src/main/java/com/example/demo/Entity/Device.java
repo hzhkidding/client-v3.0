@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class Device {
 
+    private String image;
     private String id;
     private String deviceName;
     private String deviceModel;
