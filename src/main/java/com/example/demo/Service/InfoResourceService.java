@@ -23,11 +23,13 @@ public class InfoResourceService {
         for (int i = 0; i < infoJsonArray.size(); i++) {
             JSONObject infoJsonObj = infoJsonArray.getJSONObject(i);
             if(infoJsonObj.getString("kind").equals("Service")) {
+                JSONObject labels=(JSONObject) infoJsonObj.get("labels");
                 Infomation info = new Infomation();
                 info.setInfoName(infoJsonObj.getString("aliasName"));
                 info.setInfoId(getInfoId(infoJsonObj));
                 //info.setApiArray(JSONArray.parseArray(infoJsonObj.get("apiInfo").toString()));
-                info.setImageUrl("images/icons/law.png");
+//                info.setImageUrl("images/icons/law.png");
+                info.setType(labels.get("io.fusionapp.service/type").toString());
                 infoList.add(info);
             }
         }
