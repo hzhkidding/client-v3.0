@@ -7,7 +7,7 @@ public enum  EmBusinessError implements CommonError{
     UNKNOW_ERROR(10002,"未知错误"),
     LOCATION_ERROR(10003,"未获取手机位置信息，请确保wifi处于开启状态，并开启位置授权"),
     APP_INVOKE_ERROR(10004,"当前状态不稳定，请刷新重试"),
-
+    APP_INSTANCE_ERROR(10005,"当前应用可用资源被占用，请稍后重试"),
     //20000开头为用户相关错误
     USER_NOT_EXIST(20001,"用户不存在"),
     USER_LOGIN_FAIL(20002,"手机或密码不存在"),

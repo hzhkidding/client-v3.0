@@ -109,6 +109,7 @@ DeviceResourceService {
         return deviceId.toJSONString();
     }
     public <K,V>  Map getLocationInfo(String phoneInfo){
+
         Map map = new HashMap<K, V>();
         JSONObject labelLocation = (JSONObject) JSONObject.parse(httpInvoke.postInvoke(phoneInfo,DEVICE_LABEL_URL));
         Double x = Double.valueOf(labelLocation.getString("x"));

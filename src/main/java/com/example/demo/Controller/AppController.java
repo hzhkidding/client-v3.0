@@ -58,7 +58,7 @@ public class AppController extends BaseController{
     //进入应用详情页
     @RequestMapping(path = {"/appInstance"}, method = RequestMethod.POST)
 
-    public String appInstance(Model model,@RequestParam("appId") String appId, @RequestParam("userId") String userId,@RequestParam("appName") String appName) {
+    public String appInstance(Model model,@RequestParam("appId") String appId, @RequestParam("userId") String userId,@RequestParam("appName") String appName) throws BusinessException {
 
         List<String>  deviceNameList= new ArrayList<>();
         AppDetail appDetail;
@@ -66,16 +66,14 @@ public class AppController extends BaseController{
         Map map;
         try {
             map = appService.appInstance(appId, userId, this.X, this.Y);
-            appDetail = (AppDetail) map.get("appDetail");
         } catch (Exception e) {
-            e.printStackTrace();
-            return "noapp";
+            throw new BusinessException(EmBusinessError.APP_INSTANCE_ERROR, "当前应用可用资源被占用，请稍后重试");
         }
-
+        appDetail = (AppDetail) map.get("appDetail");
         appDetail.setAppName(appName);
         model.addAttribute("AppDatail",appDetail);
         model.addAttribute("appInstanceId",map.get("appInstanceId"));
-        if(appName.equals("喝星巴克咖啡")){
+        if(appName.contains("星巴克")){
             return "starbucks";
         }
         return "newabout";
@@ -137,20 +135,7 @@ public class AppController extends BaseController{
         if(newNum == jsonArray.size()){
             return "-1";
         }
-        /*if(num != jsonArray.size()) {
-            JSONObject jsonObject = jsonArray.getJSONObject(num);
-            log.info("state=="+jsonObject.getString("state"));
-            if (jsonObject.getString("state").equals("2")) {
-                log.info(jsonArray.toJSONString());
-                log.info(jsonObject.getString("action_name")+jsonObject.getString("state"));
-                num++;
-                log.info("num=="+num);
-                return String.valueOf(num);
-            }
-        }
-        if(num == jsonArray.size()){
-            return "-1";
-        }*/
+
         return "0";
     }
     @RequestMapping(path = {"/getStatus"}, method = RequestMethod.POST)

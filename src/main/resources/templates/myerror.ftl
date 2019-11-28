@@ -21,7 +21,7 @@
 			<div class="w3layouts-errortext">
 				<h2><span></span></h2>
 				
-				<h1>${errMsg}</h1>
+				<h1 style="font-size: 23px">${errMsg}</h1>
 				<p class="w3lstext"> <a href="#"></a>  </p>
 				<div class="agile-search">
 					<form action="/${actionUrl}" method="get">

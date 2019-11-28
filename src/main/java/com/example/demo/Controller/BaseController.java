@@ -25,6 +25,8 @@ public class BaseController {
 
         Map<String, Object> responseData = new HashMap<>();
         if (ex instanceof BusinessException) {
+            ex.printStackTrace();
+
             BusinessException businessException = (BusinessException) ex;
             responseData.put("errCode", businessException.getErrCode());
             responseData.put("errMsg", businessException.getErrMsg());
@@ -33,7 +35,7 @@ public class BaseController {
             mv.setViewName("myerror");
             if(businessException.getErrCode()==10003){
                 mv.addObject("actionUrl","getDeviceResource");
-            }else if (businessException.getErrCode()==10004){
+            }else if (businessException.getErrCode()==10004||businessException.getErrCode() == 10005){
                 mv.addObject("actionUrl","getAppList");
             }
             mv.addObject("errMsg", businessException.getErrMsg());
