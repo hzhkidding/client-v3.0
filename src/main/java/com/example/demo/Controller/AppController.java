@@ -64,11 +64,8 @@ public class AppController extends BaseController{
         AppDetail appDetail;
 
         Map map;
-        try {
-            map = appService.appInstance(appId, userId, this.X, this.Y);
-        } catch (Exception e) {
-            throw new BusinessException(EmBusinessError.APP_INSTANCE_ERROR, "当前应用可用资源被占用，请稍后重试");
-        }
+        map = appService.appInstance(appId, userId, this.X, this.Y);
+
         appDetail = (AppDetail) map.get("appDetail");
         appDetail.setAppName(appName);
         model.addAttribute("AppDatail",appDetail);

@@ -106,7 +106,17 @@ public class AppService {
         map.add("y",String.valueOf(Y));
         String appInstanceInfoString = null;
 
-        appInstanceInfoString = httpInvoke.postInvoke(map,APP_INSTANCE_URL);
+        try {
+            appInstanceInfoString = httpInvoke.postInvoke(map,APP_INSTANCE_URL);
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.add("app_class_id","5dda2e1ad90231244a5ac0ca");
+            map.add("user_id","1");
+            map.add("x",null);
+            map.add("y",null);
+            map.add("count","1");
+            appInstanceInfoString= httpInvoke.postInvoke(map,APP_INSTANCE_URL);
+        }
         log.info("应用实例信息"+appInstanceInfoString);
         JSONObject appInstanceInfo = JSONObject.parseObject(appInstanceInfoString);
         JSONObject jsonObject = appInstanceInfo.getJSONObject("app_instance_resource");

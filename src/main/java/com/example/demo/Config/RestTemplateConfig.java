@@ -6,6 +6,7 @@ import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -51,7 +52,7 @@ public class RestTemplateConfig {
         SSLConnectionSocketFactory csf = new SSLConnectionSocketFactory(sslContext);
 
         CloseableHttpClient httpClient = HttpClients.custom()
-                .setSSLSocketFactory(csf)
+                .setSSLSocketFactory(csf).setRedirectStrategy(new LaxRedirectStrategy())
                 .build();
 
         HttpComponentsClientHttpRequestFactory requestFactory =
