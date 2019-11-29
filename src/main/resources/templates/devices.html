@@ -247,7 +247,7 @@
     function sendData(deviceNo,clickF,name) {
 
         var jsonData = {"cost": 0, "deviceId": deviceNo, "name": name, "status": "Pending"};
-        // if (clickF) {
+        if (clickF) {
             var reloadFlag = false;
             $.ajax({
                 url: '/sendCost',
@@ -302,7 +302,7 @@
             //
             // }
 
-        // }
+        }
     }
 
     //坐标变换
