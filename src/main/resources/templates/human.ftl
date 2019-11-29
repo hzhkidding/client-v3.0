@@ -118,7 +118,7 @@
                     <ul>
                         <li class="blue img-rounded img-responsive center-block"
                             style="border-radius:15px;box-shadow:0px 0px 2px 2px #ccc" onclick="reg()"><img
-                                    src="images/icons/appMarket.png" alt="" title=""/>
+                                    src="images/icons/HumanReg.jpg" alt="" title=""/>
                             <div style="font-size: 18px">注册</div>
                             </a>
                         </li>

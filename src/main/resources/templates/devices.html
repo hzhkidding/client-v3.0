@@ -103,8 +103,8 @@
     var l = 20;
     // imgObj.onload
     var MaxRound;
-    var deviceImgW=30;
-    var deviceImgL=35;
+    var deviceImgW = 30;
+    var deviceImgL = 35;
     imgObj.onload = function () {
         //图片尺寸自适应，与用户可视区域一致
 
@@ -127,13 +127,13 @@
         colorList[1] = "orange";
         //绘制设备
         var devicesSrc = [];
-        var devicesXYList=[];
+        var devicesXYList = [];
 
         for (var i = 0; i < deviceList.length; i++) {
             console.log(deviceList[i][0], deviceList[i][1]);
             //横向平面图，坐标转换
             var devicesXY = XYMap(deviceList[i][0], deviceList[i][1], imgW, imgH);
-            devicesXYList[i]=devicesXY;
+            devicesXYList[i] = devicesXY;
             console.log(devicesXY)
             deviceList[i][0] = devicesXY[0];
             deviceList[i][1] = devicesXY[1];
@@ -158,7 +158,7 @@
             // ctx.globalCompositeOperation = "source-over"; //全局合成操作
 
             //console.log(deviceList[i][4].length);
-            ctx.fillText(deviceList[i][4], deviceList[i][0] , deviceList[i][1]+deviceImgL*1.25, deviceList[i][1] + MaxRound);
+            ctx.fillText(deviceList[i][4], deviceList[i][0], deviceList[i][1] + deviceImgL * 1.25, deviceList[i][1] + MaxRound);
             ctx.globalCompositeOperation = "source-over"; //全局合成操作
 
         }
@@ -172,10 +172,9 @@
             // };
             (function (i) {
                 var imgDevice = new Image();
-                if (deviceList[i][3]==0) {
+                if (deviceList[i][3] == 0) {
                     imgDevice.src = "images/icons/deviceNotReg.jpg";
-                }
-                else{
+                } else {
                     imgDevice.src = devicesSrc[i];
 
                 }
@@ -214,7 +213,7 @@
         var name;
         var clickF = false;
         for (var i = 0; i < deviceList.length; i++) {
-            if (x >= deviceList[i][0]  && x <= deviceList[i][0] + deviceImgW && y >= deviceList[i][1] && y <= deviceList[i][1] + deviceImgL) {
+            if (x >= deviceList[i][0] && x <= deviceList[i][0] + deviceImgW && y >= deviceList[i][1] && y <= deviceList[i][1] + deviceImgL) {
                 deviceNo = deviceList[i][2];
                 name = deviceList[i][5];
                 if (deviceList[i][3] == 0) {
@@ -223,52 +222,10 @@
                 break;
             }
         }
+        sendData(deviceNo,clickF,name)
+
         // 需要传输的数据
-        var jsonData = {"cost": 0, "deviceId": deviceNo, "name": name, "status": "Pending"};
-        if (clickF) {
-            $.ajax({
-                url: '/sendCost',
-                async: true,
-                // 请求方式
-                type: "post",
-                // contentType
-                contentType: "application/json",
-                // dataType
-                dataType: "json",
-                // 把JS的对象或数组序列化一个json 字符串
-                data: JSON.stringify(jsonData),
-                // result 为请求的返回结果对象
-                success: function (result) {
 
-
-                    $.MsgBox.Confirm("温馨提示", "建议起拍价为 " + result + " ,是否确认", send);
-
-                    function send() {
-                        var jsonPrice = {"exPrice": result, "deviceId": deviceNo, "status": "Pending"};
-                        $.ajax({
-                            url: '/sendExPrice',
-                            async: true,
-                            // 请求方式
-                            type: "post",
-                            // contentType
-                            contentType: "application/json",
-                            // dataType
-                            dataType: "json",
-                            // 把JS的对象或数组序列化一个json 字符串
-                            data: JSON.stringify(jsonPrice),
-                            // result 为请求的返回结果对象
-                            success: function (result) {
-                                console.log(result)
-                            }
-                        })
-                    }
-
-
-                }
-            })
-            setTimeout(window.location.reload(), "1000");
-
-        }
 
         // var temp = document.createElement("form");
         // temp.action = "/sendCost";
@@ -286,6 +243,67 @@
 
 
     })
+
+    function sendData(deviceNo,clickF,name) {
+
+        var jsonData = {"cost": 0, "deviceId": deviceNo, "name": name, "status": "Pending"};
+        // if (clickF) {
+            var reloadFlag = false;
+            $.ajax({
+                url: '/sendCost',
+                async: true,
+                // 请求方式
+                type: "post",
+                // contentType
+                contentType: "application/json",
+                // dataType
+                dataType: "json",
+                // 把JS的对象或数组序列化一个json 字符串
+                data: JSON.stringify(jsonData),
+                // result 为请求的返回结果对象
+                success: function (result) {
+
+
+                    $.MsgBox.Confirm("温馨提示", "建议起拍价为 " + result + " ,是否确认", send);
+                    // console.log(result);
+                    function send() {
+                        var jsonPrice = {"exPrice": result, "deviceId": deviceNo, "status": "Pending"};
+                        $.ajax({
+                            url: '/sendExPrice',
+                            async: true,
+                            // 请求方式
+                            type: "post",
+                            // contentType
+                            contentType: "application/json",
+                            // 把JS的对象或数组序列化一个json 字符串
+                            data: JSON.stringify(jsonPrice),
+                            // result 为请求的返回结果对象
+                            success: function () {
+                                // console.log(result2);
+                                   window.location.reload();
+                            },
+                            error : function(){
+
+                                // window.location.reload();
+
+                            }
+                        })
+                    }
+                    // console.log(reloadFlag);
+                    // if (reloadFlag) {
+                    // setTimeout(window.location.reload(), "1000");
+
+                    // }
+                }
+
+            })
+            // if(reloadFlag){
+            //     setTimeout(window.location.reload(), "1000");
+            //
+            // }
+
+        // }
+    }
 
     //坐标变换
     function XYMap(OriginX, OriginY, width, height) {
