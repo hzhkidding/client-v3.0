@@ -100,7 +100,9 @@
                 </div>
 
 
+<#--
                 <a class="button_11 bluegreen bluegreen_borderbottom radius4" onclick="sendNeed()">确定</a>
+-->
                 <a class="button_11 orange bluegreen_borderbottom radius4" onclick="delInstance()">退出应用</a>
 
 
@@ -116,7 +118,7 @@
 
     function sendNeed() {
 
-        $.MsgBox.Alert("消息", "dddd")
+        $.MsgBox.Alert("消息", "正在运行星巴克咖啡")
 
 
     }
