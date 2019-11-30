@@ -29,7 +29,7 @@
     <style>
         mycontainer{
             /*margin:0 auto;*/
-            top:100px;
+            margin-top:100px;
         }
 
     </style>
@@ -101,18 +101,20 @@
 
     c7.width = document.documentElement.clientWidth - 5;
     // c7.height =580;
-    c7.height=262;
+    // c7.height=262;
+    // c7.height=524;
+    c7.height =c7.width*1.416
     var cW = c7.offsetWidth;    // 获取元素宽度
     var imgObj = new Image();
-    imgObj.src = "images/1201.jpg";
+    imgObj.src = "images/12012.png";
     var imgW = '';
     var imgH = '';
 
     var l = 20;
     // imgObj.onload
     var MaxRound;
-    var deviceImgW = 30;
-    var deviceImgL = 35;
+    var deviceImgW = 15;
+    var deviceImgL = 17.5;
     imgObj.onload = function () {
         //图片尺寸自适应，与用户可视区域一致
 
@@ -142,7 +144,7 @@
             //横向平面图，坐标转换
             var devicesXY = XYMap(deviceList[i][0], deviceList[i][1], imgW, imgH);
             devicesXYList[i] = devicesXY;
-            console.log(devicesXY)
+            console.log(devicesXY,deviceList[i][4]);
             deviceList[i][0] = devicesXY[0];
             deviceList[i][1] = devicesXY[1];
             //渲染颜色
@@ -316,10 +318,10 @@
     //坐标变换
     function XYMap(OriginX, OriginY, width, height) {
         var newX, newY;
-        // newY = OriginX * height;
-        // newX = width - OringY * width;
-        newX = OriginX * width;
-        newY = OriginY * height;
+        newY = OriginX * height;
+        newX = width - OriginY * width;
+        // newX = OriginX * width;
+        // newY = OriginY * height;
 
         return [newX, newY];
     }
