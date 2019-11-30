@@ -111,6 +111,7 @@ public class AppService {
         try {
             appInstanceInfoString = httpInvoke.postInvoke(map,APP_INSTANCE_URL);
         } catch (Exception e) {
+            System.out.println("走道咖啡机");
             e.printStackTrace();
             map.remove("app_class_id");
             map.add("app_class_id","5dda2e1ad90231244a5ac0ca");

@@ -41,7 +41,7 @@ DeviceResourceService {
     public <K,V> Map getDeviceResource() throws InterruptedException, BusinessException {
         //从phoneController获取手机相关信息//json格式数据
 
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         if(phoneInfoController.getPhoneInfo()==null){
             throw new BusinessException(EmBusinessError.LOCATION_ERROR, "未获取手机位置信息，请确保wifi处于开启状态，并开启位置授权");
         }
@@ -58,7 +58,7 @@ DeviceResourceService {
         if(room == null){
             room = "110";
         }
-        json.put("value", room);
+        json.put("value", "110");
         labelSelector.add(json);
         selectorJson.put("labelSelector", labelSelector);
         String deviceResourceInfo = httpInvoke.exchange(selectorJson.toJSONString(), DEVICE_RESOURCE_URL);
