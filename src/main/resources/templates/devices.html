@@ -26,6 +26,13 @@
 
         }
     </script>
+    <style>
+        mycontainer{
+            /*margin:0 auto;*/
+            top:100px;
+        }
+
+    </style>
 </head>
 <body>
 <div id="wrapper">
@@ -38,7 +45,7 @@
             <div class="logo"><a href="">物理资源管理</a></div>
 
             <nav id="menu">
-                <div class="container">
+                <div class="container mycontainer" >
                     <canvas id="myCanvas" width="433" height="405" style="border: 2px solid grey"></canvas>
                 </div>
 
@@ -93,10 +100,11 @@
     c7 = document.getElementById("myCanvas");
 
     c7.width = document.documentElement.clientWidth - 5;
-    c7.height =580;
+    // c7.height =580;
+    c7.height=262;
     var cW = c7.offsetWidth;    // 获取元素宽度
     var imgObj = new Image();
-    imgObj.src = "images/30wenjin.png";
+    imgObj.src = "images/1201.jpg";
     var imgW = '';
     var imgH = '';
 
